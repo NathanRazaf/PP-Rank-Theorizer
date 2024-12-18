@@ -30,7 +30,7 @@ enum ModNames {
     TD = "Touch Device"
 }
 
-enum RankAssetPaths {
+enum GradeAssetPaths {
     SSH = 'GradeSmall-SS-Silver.6681366c.svg',
     SS = 'GradeSmall-SS.a21de890.svg',
     SH = 'GradeSmall-S-Silver.811ae28c.svg',
@@ -49,12 +49,12 @@ function getModName(mod: string) : string {
     return ModNames[mod as keyof typeof ModNames];
 }
 
-function getRankAssetPath(rank: string): string {
-    return "https://osu.ppy.sh/assets/images/"+RankAssetPaths[rank as keyof typeof RankAssetPaths]
+function getGradeAssetPath(Grade: string): string {
+    return "https://osu.ppy.sh/assets/images/"+GradeAssetPaths[Grade as keyof typeof GradeAssetPaths]
 }
 
 function getFlagUrl(countryCode: string) {
     return `https://raw.githubusercontent.com/ppy/osu-resources/refs/heads/master/osu.Game.Resources/Textures/Flags/${countryCode}.png`;
 }
 
-export { getModAssetPath, getRankAssetPath, getFlagUrl, getModName }
+export { getModAssetPath, getGradeAssetPath, getFlagUrl, getModName }

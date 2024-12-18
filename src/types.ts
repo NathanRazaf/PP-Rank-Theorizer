@@ -37,7 +37,6 @@ export interface Score {
     grade: string;
 }
 
-
 export interface ScoreResponse {
     accuracy: number;
     score: number;

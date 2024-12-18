@@ -1,5 +1,5 @@
 import { Score } from "./types.ts";
-import { getModAssetPath } from "./assets/imageAssetPaths.ts";
+import {getModAssetPath, getGradeAssetPath} from "./assets/imageAssetPaths.ts";
 import { getModName } from "./assets/imageAssetPaths.ts";
 
 function ModsArray({ mods }: { mods: string[] }) {
@@ -36,7 +36,7 @@ function ScoreInfo({ score }: { score: Score }) {
                 <ModsArray mods={score.mods} />
                 <div>PP: {score.pp.toFixed(2)}</div>
                 <div>Max Combo: {score.maxCombo.toLocaleString()}</div>
-                <div>Grade: {score.grade}</div>
+                <div>Grade: <img src={getGradeAssetPath(score.grade)} alt={"Grade"}/></div>
             </div>
         </div>
     );
