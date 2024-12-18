@@ -22,6 +22,7 @@ export const fetchUserData = async (username: string): Promise<User> => {
             avatarUrl: data.avatar_url,
             coverUrl: data.cover_url,
             countryCode: data.country_code,
+            rankHistory: data.rank_history,
             pp: data.pp,
             globalRank: data.global_rank,
             countryRank: data.country_rank,

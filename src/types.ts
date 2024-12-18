@@ -3,6 +3,7 @@ export interface User {
     avatarUrl: string;
     coverUrl: string;
     countryCode: string;
+    rankHistory: number[];
     pp: number;
     globalRank: number;
     countryRank: number;
@@ -16,6 +17,7 @@ export interface GetUserApiResponse {
     avatar_url: string;
     cover_url: string;
     country_code: string;
+    rank_history: number[];
     pp: number;
     global_rank: number;
     country_rank: number;

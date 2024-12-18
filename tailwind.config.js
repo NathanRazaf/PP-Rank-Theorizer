@@ -5,7 +5,16 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        default: 'var(--font-default)',
+        content: 'var(--font-content)',
+        'default-vi': 'var(--font-default-vi)',
+        'default-zh': 'var(--font-default-zh)',
+        'default-th': 'var(--font-default-th)',
+        'default-zh-tw': 'var(--font-default-zh-tw)',
+      },
+    },
   },
   plugins: [],
 }

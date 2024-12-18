@@ -1,7 +1,94 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
+@font-face {
+  font-family: 'Torus';
+  src: url('./assets/fonts/TorusPro-Thin.woff2') format('woff2');
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Torus';
+  src: url('./assets/fonts/TorusPro-Thinitalic.woff2') format('woff2');
+  font-weight: 100;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Torus';
+  src: url('./assets/fonts/TorusPro-Light.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Torus';
+  src: url('./assets/fonts/TorusPro-LightItalic.woff2') format('woff2');
+  font-weight: 300;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Torus';
+  src: url('./assets/fonts/TorusPro-Regular.woff2') format('woff2');
   font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Torus';
+  src: url('./assets/fonts/TorusPro-Italic.woff2') format('woff2');
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Torus';
+  src: url('./assets/fonts/TorusPro-SemiBold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Torus';
+  src: url('./assets/fonts/TorusPro-SemiBoldItalic.woff2') format('woff2');
+  font-weight: 600;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Torus';
+  src: url('./assets/fonts/TorusPro-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Torus';
+  src: url('./assets/fonts/TorusPro-BoldItalic.woff2') format('woff2');
+  font-weight: 700;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Torus';
+  src: url('./assets/fonts/TorusPro-Heavy.woff2') format('woff2');
+  font-weight: 800;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Torus';
+  src: url('./assets/fonts/TorusPro-HeavyItalic.woff2') format('woff2');
+  font-weight: 800;
+  font-style: italic;
+}
+
+:root {
+  --font-default: Torus, Inter, "Helvetica Neue", Tahoma, Arial, "Hiragino Kaku Gothic ProN", Meiryo, "Microsoft YaHei", "Apple SD Gothic Neo", sans-serif;
+  --font-default-vi: Quicksand, Torus, Inter, "Helvetica Neue", Tahoma, Arial, "PingFang TC", "Microsoft JhengHei", "Apple SD Gothic Neo", system-ui, sans-serif;
+  --font-default-zh: Torus, Inter, "Helvetica Neue", Tahoma, Arial, "Hiragino Sans GB", "Microsoft YaHei", "Apple SD Gothic Neo", system-ui, sans-serif;
+  --font-default-th: Torus, Inter, "Helvetica Neue", "Prompt", Tahoma, Arial, "Hiragino Kaku Gothic ProN", Meiryo, "Microsoft YaHei", "Apple SD Gothic Neo", sans-serif;
+  --font-default-zh-tw: Torus, Inter, "Helvetica Neue", Tahoma, Arial, "PingFang TC", "Microsoft JhengHei", "Apple SD Gothic Neo", system-ui, sans-serif;
+  --font-content: Inter, sans-serif;
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
@@ -13,6 +100,8 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+
+
 a {
   font-weight: 500;
   color: #646cff;
@@ -23,6 +112,7 @@ a:hover {
 }
 
 body {
+  font-family: var(--font-default);
   margin: 0;
   display: flex;
   place-items: center;
