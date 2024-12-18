@@ -42,10 +42,11 @@ function RankHistory(props: { rankHistory: number[] }) {
             const rank = Number(payload[0].payload.rank);
             const daysAgo = payload[0].payload.daysAgo;
             return (
-                <div className="bg-white p-2 border rounded shadow-lg">
-                    <p className="text-gray-600">#{rank.toLocaleString()}</p>
-                    <p className="text-pink-500">
-                        {daysAgo === 0
+                <div className="bg-osu-bg-1 p-2  rounded-2xl ">
+                    <p className="text-white"><span className="font-bold">Global Ranking</span> #{rank.toLocaleString()}
+                    </p>
+                    <p className="text-osu-small-text">
+                    {daysAgo === 0
                             ? 'now'
                             : daysAgo === 1
                                 ? '1 day ago'
@@ -58,7 +59,7 @@ function RankHistory(props: { rankHistory: number[] }) {
     };
 
     return (
-        <div className="w-full h-32">
+        <div className="w-full h-24">
             <ResponsiveContainer width="100%" height="100%">
                 <LineChart
                     data={data}
@@ -76,15 +77,16 @@ function RankHistory(props: { rankHistory: number[] }) {
                     />
                     <Tooltip
                         content={<CustomTooltip />}
-                        cursor={{ stroke: '#666', strokeWidth: 1 }}
+                        cursor={{ stroke: '#fed700', strokeWidth: 2 }}
                     />
                     <Line
                         type="monotone"
                         dataKey="rank"
-                        stroke="#ff66ab"
+                        stroke="#fed700"
                         strokeWidth={2}
                         dot={false}
-                        activeDot={{ r: 4 }}
+                        activeDot={{ r: 8, strokeWidth: 4, stroke: '#fed700', fill: 'var(--osu-bg-2)' }}
+
                         isAnimationActive={false}
                     />
                 </LineChart>

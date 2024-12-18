@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @font-face {
   font-family: 'Torus';
   src: url('./assets/fonts/TorusPro-Thin.woff2') format('woff2');
@@ -7,7 +11,7 @@
 
 @font-face {
   font-family: 'Torus';
-  src: url('./assets/fonts/TorusPro-Thinitalic.woff2') format('woff2');
+  src: url('./assets/fonts/TorusPro-ThinItalic.woff2') format('woff2');
   font-weight: 100;
   font-style: italic;
 }
@@ -90,9 +94,14 @@
   --font-default-zh-tw: Torus, Inter, "Helvetica Neue", Tahoma, Arial, "PingFang TC", "Microsoft JhengHei", "Apple SD Gothic Neo", system-ui, sans-serif;
   --font-content: Inter, sans-serif;
 
+  --osu-small-text: #e09cbd;
+  --osu-bg-1: #1d1619;
+  --osu-bg-2: #2b2126;
+  --osu-bg-3: #483740;
+
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: var(--osu-bg-1);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -112,12 +121,14 @@ a:hover {
 }
 
 body {
-  font-family: var(--font-default);
+  font-family: var(--font-default), serif;
+  background-color: var(--osu-bg-1);
   margin: 0;
   display: flex;
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+
 }
 
 h1 {
@@ -156,7 +167,3 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;

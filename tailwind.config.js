@@ -14,6 +14,12 @@ export default {
         'default-th': 'var(--font-default-th)',
         'default-zh-tw': 'var(--font-default-zh-tw)',
       },
+      colors: {
+        'osu-small-text': 'var(--osu-small-text)',
+        'osu-bg-1': 'var(--osu-bg-1)',
+        'osu-bg-2': 'var(--osu-bg-2)',
+        'osu-bg-3': 'var(--osu-bg-3)',
+      }
     },
   },
   plugins: [],
