@@ -48,7 +48,10 @@ export const fetchUserScoresData = async (username: string): Promise<Score[]> =>
         return data.map(score => ({
             accuracy: score.accuracy,
             score: score.score,
-            beatmapId: score.beatmap_id,
+            beatmapUrl: score.beatmap_url,
+            title: score.title,
+            artist: score.artist,
+            version: score.version,
             mods: score.mods,
             pp: score.pp,
             maxCombo: score.max_combo,

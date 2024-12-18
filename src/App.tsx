@@ -1,6 +1,5 @@
 // App.tsx
 import { useState } from 'react';
-import { getRankAssetPath, getModAssetPath } from "./assets/imageAssetPaths";
 import { ProfileInfo } from "./ProfileInfo";
 import { fetchUserData, fetchUserScoresData } from './api';
 import { User, Score } from './types';
@@ -20,8 +19,8 @@ const App = () => {
         try {
             // Fetch both user data and scores in parallel
             const [user, scores] = await Promise.all([
-                fetchUserData('Yass29'),
-                fetchUserScoresData('Yass29')
+                fetchUserData('NathanRazaf'),
+                fetchUserScoresData('NathanRazaf')
             ]);
 
             setUserData(user);
@@ -36,15 +35,6 @@ const App = () => {
     return (
         <div className="container mx-auto p-4">
             <div className="flex flex-col items-center gap-4">
-                <div>
-                    <a href="https://vite.dev" target="_blank" rel="noopener noreferrer" className="mr-4">
-                        <img src={getRankAssetPath("SSH")} className="logo" alt="Vite logo" />
-                    </a>
-                    <a href="https://react.dev" target="_blank" rel="noopener noreferrer">
-                        <img src={getModAssetPath("TD")} className="logo react" alt="React logo" />
-                    </a>
-                </div>
-
                 <h1 className="text-2xl font-bold">User Profile Viewer</h1>
 
                 <button
