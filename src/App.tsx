@@ -1,6 +1,6 @@
 // App.tsx
 import { useState } from 'react';
-import { ProfileInfo } from "./ProfileInfo";
+import { ProfileInfo } from "./ProfileInfo/ProfileInfo.tsx";
 import { fetchUserData, fetchUserScoresData } from './api';
 import { User, Score } from './types';
 import { ApiError } from './api';
@@ -33,7 +33,7 @@ const App = () => {
     };
 
     return (
-        <div className="container mx-auto p-4">
+        <div className="osu-page mx-auto bg-osu-bg-2">
             <div className="flex flex-col items-center gap-4">
                 <h1 className="text-2xl font-bold">User Profile Viewer</h1>
 
@@ -51,7 +51,7 @@ const App = () => {
                     </div>
                 )}
 
-                <div className="w-full max-w-4xl space-y-8">
+                <div className="space-y-8">
                     {userData && <ProfileInfo user={userData} />}
                     {scoresData && <ScoresInfo scores={scoresData} />}
                 </div>

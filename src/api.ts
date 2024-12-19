@@ -23,6 +23,7 @@ export const fetchUserData = async (username: string): Promise<User> => {
             coverUrl: data.cover_url,
             countryCode: data.country_code,
             rankHistory: data.rank_history,
+            gradeCounts: data.grade_counts,
             pp: data.pp,
             globalRank: data.global_rank,
             countryRank: data.country_rank,

@@ -1,32 +1,4 @@
-import { getFlagUrl } from "./assets/imageAssetPaths.ts";
-import {
-    LineChart,
-    Line,
-    XAxis,
-    YAxis,
-    Tooltip,
-    ResponsiveContainer,
-} from 'recharts';
-import {User} from "./types.ts";
-
-function ProfileInfo(props: { user: User }) {
-    return (
-        <div>
-        <h2>Profile Info</h2>
-        <img src={props.user.avatarUrl} alt="Avatar" />
-        <img src={props.user.coverUrl} alt="Cover" />
-        <img src={getFlagUrl(props.user.countryCode)} alt="Flag" />
-        <p>PP: {props.user.pp}</p>
-        <p>Global Rank: {props.user.globalRank}</p>
-            <RankHistory rankHistory={props.user.rankHistory} />
-        <p>Country Rank: {props.user.countryRank}</p>
-        <p>Accuracy: {props.user.accuracy}</p>
-        <p>Level: {props.user.level}</p>
-        <p>Level Progress: {props.user.levelProgress}</p>
-        <p>Username: {props.user.username}</p>
-        </div>
-    );
-}
+import {Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis} from "recharts";
 
 function RankHistory(props: { rankHistory: number[] }) {
     // Transform ranks into data points with days ago
@@ -46,7 +18,7 @@ function RankHistory(props: { rankHistory: number[] }) {
                     <p className="text-white"><span className="font-bold">Global Ranking</span> #{rank.toLocaleString()}
                     </p>
                     <p className="text-osu-small-text">
-                    {daysAgo === 0
+                        {daysAgo === 0
                             ? 'now'
                             : daysAgo === 1
                                 ? '1 day ago'
@@ -95,4 +67,4 @@ function RankHistory(props: { rankHistory: number[] }) {
     );
 }
 
-export { ProfileInfo }
+export { RankHistory }

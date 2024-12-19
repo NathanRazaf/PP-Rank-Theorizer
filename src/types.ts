@@ -4,6 +4,7 @@ export interface User {
     coverUrl: string;
     countryCode: string;
     rankHistory: number[];
+    gradeCounts: GradeCounts;
     pp: number;
     globalRank: number;
     countryRank: number;
@@ -12,12 +13,21 @@ export interface User {
     levelProgress: number;
 }
 
+export interface GradeCounts {
+    SSH: number;
+    SS: number;
+    SH: number;
+    S: number;
+    A: number;
+}
+
 export interface GetUserApiResponse {
     username: string;
     avatar_url: string;
     cover_url: string;
     country_code: string;
     rank_history: number[];
+    grade_counts: GradeCounts;
     pp: number;
     global_rank: number;
     country_rank: number;
