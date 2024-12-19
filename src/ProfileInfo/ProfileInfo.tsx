@@ -15,7 +15,7 @@ function ProfileInfo(props: { user: User }) {
         <RankHistory rankHistory={props.user.rankHistory} />
         <GradeCountsArray gradeCounts={props.user.gradeCounts} />
         <p>Country Rank: {props.user.countryRank}</p>
-        <p>Accuracy: {props.user.accuracy}</p>
+        <p>Accuracy: {props.user.statistics.accuracy}</p>
         <p>Level: {props.user.level}</p>
         <p>Level Progress: {props.user.levelProgress}</p>
         <p>Username: {props.user.username}</p>

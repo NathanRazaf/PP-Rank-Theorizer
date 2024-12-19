@@ -22,12 +22,14 @@ export const fetchUserData = async (username: string): Promise<User> => {
             avatarUrl: data.avatar_url,
             coverUrl: data.cover_url,
             countryCode: data.country_code,
+            countryName: data.country_name,
+            playTime: data.play_time,
             rankHistory: data.rank_history,
             gradeCounts: data.grade_counts,
             pp: data.pp,
             globalRank: data.global_rank,
             countryRank: data.country_rank,
-            accuracy: data.accuracy,
+            statistics: data.statistics,
             level: data.level,
             levelProgress: data.level_progress
         };

@@ -3,14 +3,26 @@ export interface User {
     avatarUrl: string;
     coverUrl: string;
     countryCode: string;
+    playTime: number;
+    countryName: string;
+    statistics: UserStatistics;
     rankHistory: number[];
     gradeCounts: GradeCounts;
     pp: number;
     globalRank: number;
     countryRank: number;
-    accuracy: number;
     level: number;
     levelProgress: number;
+}
+
+export interface UserStatistics {
+    accuracy: number;
+    ranked_score: number;
+    total_score: number;
+    replays_watched: number;
+    total_hits: number;
+    maximum_combo: number;
+    play_count: number;
 }
 
 export interface GradeCounts {
@@ -26,12 +38,14 @@ export interface GetUserApiResponse {
     avatar_url: string;
     cover_url: string;
     country_code: string;
+    play_time: number;
+    country_name: string;
+    statistics: UserStatistics;
     rank_history: number[];
     grade_counts: GradeCounts;
     pp: number;
     global_rank: number;
     country_rank: number;
-    accuracy: number;
     level: number;
     level_progress: number;
 }

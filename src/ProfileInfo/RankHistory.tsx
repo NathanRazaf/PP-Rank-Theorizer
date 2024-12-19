@@ -14,7 +14,7 @@ function RankHistory(props: { rankHistory: number[] }) {
             const rank = Number(payload[0].payload.rank);
             const daysAgo = payload[0].payload.daysAgo;
             return (
-                <div className="bg-osu-bg-1 p-2  rounded-2xl ">
+                <div className="bg-osu-bg-1 p-3 rounded-2xl ">
                     <p className="text-white"><span className="font-bold">Global Ranking</span> #{rank.toLocaleString()}
                     </p>
                     <p className="text-osu-small-text">
