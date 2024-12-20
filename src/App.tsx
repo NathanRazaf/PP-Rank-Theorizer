@@ -19,8 +19,8 @@ const App = () => {
         try {
             // Fetch both user data and scores in parallel
             const [user, scores] = await Promise.all([
-                fetchUserData('NathanRazaf'),
-                fetchUserScoresData('NathanRazaf')
+                fetchUserData('mrekk'),
+                fetchUserScoresData('mrekk')
             ]);
 
             setUserData(user);
@@ -33,7 +33,7 @@ const App = () => {
     };
 
     return (
-        <div className="osu-page mx-auto px-4 bg-osu-bg-2">
+        <div className="osu-page mx-auto bg-osu-bg-2">
             <div className="flex flex-col items-center gap-4">
                 <h1 className="text-2xl font-bold">User Profile Viewer</h1>
 

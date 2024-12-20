@@ -4,7 +4,9 @@ export interface User {
     coverUrl: string;
     countryCode: string;
     playTime: number;
+    numMedals: number;
     countryName: string;
+    supportLevel: number;
     statistics: UserStatistics;
     rankHistory: number[];
     gradeCounts: GradeCounts;
@@ -40,6 +42,8 @@ export interface GetUserApiResponse {
     country_code: string;
     play_time: number;
     country_name: string;
+    num_medals: number;
+    support_level: number;
     statistics: UserStatistics;
     rank_history: number[];
     grade_counts: GradeCounts;
