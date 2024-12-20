@@ -1,21 +1,52 @@
 import { User, Score, GetUserApiResponse, GetUserScoresApiResponse } from './types';
 
-const API_BASE_URL = 'http://127.0.0.1:8000';
+
+export interface ApiErrorResponse {
+    detail: {
+        message: string;
+        error: string;
+    };
+}
 
 export class ApiError extends Error {
-    constructor(message: string) {
+    public statusCode?: number;
+    public serverMessage?: string;
+
+    constructor(message: string, statusCode?: number, serverMessage?: string) {
         super(message);
         this.name = 'ApiError';
+        this.statusCode = statusCode;
+        this.serverMessage = serverMessage;
     }
+}
+
+const API_BASE_URL = 'http://127.0.0.1:8000';
+
+async function handleApiResponse<T>(response: Response): Promise<T> {
+    if (!response.ok) {
+        let errorMessage = `HTTP Error ${response.status}`;
+        let serverMessage: string | undefined;
+
+        try {
+            const errorData: ApiErrorResponse = await response.json();
+            errorMessage = errorData.detail.message;
+            serverMessage = errorData.detail.error;
+        } catch {
+            // If parsing fails, use the status text
+            errorMessage = response.statusText || errorMessage;
+        }
+
+        throw new ApiError(errorMessage, response.status, serverMessage);
+    }
+
+    return response.json();
 }
 
 export const fetchUserData = async (username: string): Promise<User> => {
     try {
-        const response = await fetch(`${API_BASE_URL}/user/${username}`);
-        if (!response.ok) {
-            throw new ApiError(`Failed to fetch user data: ${response.statusText}`);
-        }
-        const data: GetUserApiResponse = await response.json();
+        const data = await handleApiResponse<GetUserApiResponse>(
+            await fetch(`${API_BASE_URL}/user/${username}`)
+        );
 
         return {
             username: data.username,
@@ -39,17 +70,19 @@ export const fetchUserData = async (username: string): Promise<User> => {
         if (error instanceof ApiError) {
             throw error;
         }
-        throw new ApiError('Failed to fetch user data');
+        // Handle unexpected errors (network issues, etc.)
+        throw new ApiError(
+            'Failed to fetch user data: Network or connectivity issue',
+            500
+        );
     }
 };
 
 export const fetchUserScoresData = async (username: string): Promise<Score[]> => {
     try {
-        const response = await fetch(`${API_BASE_URL}/user/${username}/scores`);
-        if (!response.ok) {
-            throw new ApiError(`Failed to fetch user scores data: ${response.statusText}`);
-        }
-        const data: GetUserScoresApiResponse = await response.json();
+        const data = await handleApiResponse<GetUserScoresApiResponse>(
+            await fetch(`${API_BASE_URL}/user/${username}/scores`)
+        );
 
         return data.map(score => ({
             accuracy: score.accuracy,
@@ -67,6 +100,10 @@ export const fetchUserScoresData = async (username: string): Promise<Score[]> =>
         if (error instanceof ApiError) {
             throw error;
         }
-        throw new ApiError('Failed to fetch user scores data');
+        // Handle unexpected errors (network issues, etc.)
+        throw new ApiError(
+            'Failed to fetch user scores: Network or connectivity issue',
+            500
+        );
     }
 };
