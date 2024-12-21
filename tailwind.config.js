@@ -19,6 +19,8 @@ export default {
         'osu-bg-1': 'var(--osu-bg-1)',
         'osu-bg-2': 'var(--osu-bg-2)',
         'osu-bg-3': 'var(--osu-bg-3)',
+        'score-main-bg': 'var(--score-main-bg)',
+        'score-bg': 'var(--score-bg)',
       }
     },
   },

@@ -53,31 +53,3 @@ export interface GetUserApiResponse {
     level: number;
     level_progress: number;
 }
-
-export interface Score {
-    accuracy: number;
-    score: number;
-    beatmapUrl: string;
-    title: string;
-    artist: string;
-    version: string;
-    mods: string[];
-    pp: number;
-    maxCombo: number;
-    grade: string;
-}
-
-export interface ScoreResponse {
-    accuracy: number;
-    score: number;
-    beatmap_url: string;
-    title: string;
-    artist: string;
-    version: string;
-    mods: string[];
-    pp: number;
-    max_combo: number;
-    grade: string;
-}
-
-export type GetUserScoresApiResponse = Array<ScoreResponse>

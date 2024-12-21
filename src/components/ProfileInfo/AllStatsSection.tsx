@@ -1,6 +1,6 @@
-import {User} from "../types.ts";
-import { MainStatsSection } from "./MainStatsSection.tsx";
-import { StatsDetailedSection } from "./StatsDetailedSection.tsx";
+import {User} from "../../types/userTypes";
+import MainStatsSection from "./MainStatsSection.tsx";
+import StatsDetailedSection from "./StatsDetailedSection.tsx";
 
 function AllStatsSection(props: {user: User}) {
     return (
@@ -16,4 +16,4 @@ function AllStatsSection(props: {user: User}) {
     )
 }
 
-export {AllStatsSection}
+export default AllStatsSection

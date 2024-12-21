@@ -80,4 +80,4 @@ function RankHistory(props: { rankHistory: number[] }) {
     );
 }
 
-export { RankHistory }
+export default RankHistory

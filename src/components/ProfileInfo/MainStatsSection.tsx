@@ -1,5 +1,5 @@
-import {User} from "../types.ts";
-import { RankHistory } from "./RankHistory.tsx";
+import {User} from "../../types/userTypes";
+import RankHistory from "./RankHistory.tsx";
 import { Tooltip } from 'react-tooltip'
 import { GradeCountsArray } from "./GradeCounts.tsx";
 
@@ -61,4 +61,4 @@ function convertSecondsToHours(totalSeconds: number) {
 }
 
 
-export {MainStatsSection}
+export default MainStatsSection

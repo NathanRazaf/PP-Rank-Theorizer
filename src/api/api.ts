@@ -1,4 +1,5 @@
-import { User, Score, GetUserApiResponse, GetUserScoresApiResponse } from './types';
+import { User, GetUserApiResponse } from '../types/userTypes';
+import { Score, GetUserScoresApiResponse } from '../types/scoreTypes';
 
 
 export interface ApiErrorResponse {
@@ -90,6 +91,8 @@ export const fetchUserScoresData = async (username: string): Promise<Score[]> =>
             beatmapUrl: score.beatmap_url,
             title: score.title,
             artist: score.artist,
+            id: score.id,
+            date: score.date,
             version: score.version,
             mods: score.mods,
             pp: score.pp,

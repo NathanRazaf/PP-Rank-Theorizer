@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 interface SearchContainerProps {
     onSearch: (username: string) => void;
@@ -12,6 +12,8 @@ export const SearchContainer = ({ onSearch, isLoading }: SearchContainerProps) =
         e.preventDefault();
         if (username.trim()) {
             onSearch(username.trim());
+            // Remove the username from the search input
+            setUsername('');
         }
     };
 

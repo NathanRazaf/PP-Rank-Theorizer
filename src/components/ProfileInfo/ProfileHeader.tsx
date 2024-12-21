@@ -1,5 +1,5 @@
-import {User} from "../types.ts";
-import { getFlagUrl } from "../assets/imageAssetPaths.ts";
+import {User} from "../../types/userTypes";
+import { getFlagUrl } from "../../assets/imageAssetPaths.ts";
 import { Tooltip } from 'react-tooltip'
 
 function ProfileHeader(props: { user: User }) {
@@ -7,7 +7,11 @@ function ProfileHeader(props: { user: User }) {
         <div className="flex flex-col m-0 bg-osu-bg-3 profile-header">
             <Tooltip id="osu-supporter-tooltip" opacity={1} className="z-50" style={{ backgroundColor: "#1d1619", padding: "5px 20px 5px 20px"}} />
             <Tooltip id="country-name-tooltip" opacity={1} className="z-50" style={{ backgroundColor: "#1d1619", padding: "5px 20px 5px 20px"}} />
-            <img src={props.user.coverUrl} alt="Cover"/>
+            <img
+                src={props.user.coverUrl}
+                alt="Cover"
+                className="w-full object-cover object-center relative md:h-64 h-24"
+            />
             <div className="flex flex-row items-center px-12 gap-4">
                 <img src={props.user.avatarUrl} alt="Avatar" className="user-avatar"/>
                 <div className="flex flex-col">
@@ -53,4 +57,4 @@ function SupporterContainer(props : {numHearts: number}) {
      )
 }
 
-export {ProfileHeader}
+export default ProfileHeader

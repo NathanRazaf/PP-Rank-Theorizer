@@ -1,6 +1,6 @@
-import {User} from "../types.ts";
-import { ProfileHeader } from "./ProfileHeader.tsx";
-import { AllStatsSection } from "./AllStatsSection.tsx";
+import {User} from "../../types/userTypes";
+import ProfileHeader from "./ProfileHeader.tsx";
+import AllStatsSection from "./AllStatsSection.tsx";
 
 function ProfileInfo(props: { user: User }) {
     return (
@@ -11,4 +11,4 @@ function ProfileInfo(props: { user: User }) {
     );
 }
 
-export { ProfileInfo }
+export default ProfileInfo

@@ -4,84 +4,84 @@
 
 @font-face {
   font-family: 'Torus';
-  src: url('./assets/fonts/TorusPro-Thin.woff2') format('woff2');
+  src: url('fonts/TorusPro-Thin.woff2') format('woff2');
   font-weight: 100;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Torus';
-  src: url('./assets/fonts/TorusPro-ThinItalic.woff2') format('woff2');
+  src: url('fonts/TorusPro-ThinItalic.woff2') format('woff2');
   font-weight: 100;
   font-style: italic;
 }
 
 @font-face {
   font-family: 'Torus';
-  src: url('./assets/fonts/TorusPro-Light.woff2') format('woff2');
+  src: url('fonts/TorusPro-Light.woff2') format('woff2');
   font-weight: 300;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Torus';
-  src: url('./assets/fonts/TorusPro-LightItalic.woff2') format('woff2');
+  src: url('fonts/TorusPro-LightItalic.woff2') format('woff2');
   font-weight: 300;
   font-style: italic;
 }
 
 @font-face {
   font-family: 'Torus';
-  src: url('./assets/fonts/TorusPro-Regular.woff2') format('woff2');
+  src: url('fonts/TorusPro-Regular.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Torus';
-  src: url('./assets/fonts/TorusPro-Italic.woff2') format('woff2');
+  src: url('fonts/TorusPro-Italic.woff2') format('woff2');
   font-weight: 400;
   font-style: italic;
 }
 
 @font-face {
   font-family: 'Torus';
-  src: url('./assets/fonts/TorusPro-SemiBold.woff2') format('woff2');
+  src: url('fonts/TorusPro-SemiBold.woff2') format('woff2');
   font-weight: 600;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Torus';
-  src: url('./assets/fonts/TorusPro-SemiBoldItalic.woff2') format('woff2');
+  src: url('fonts/TorusPro-SemiBoldItalic.woff2') format('woff2');
   font-weight: 600;
   font-style: italic;
 }
 
 @font-face {
   font-family: 'Torus';
-  src: url('./assets/fonts/TorusPro-Bold.woff2') format('woff2');
+  src: url('fonts/TorusPro-Bold.woff2') format('woff2');
   font-weight: 700;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Torus';
-  src: url('./assets/fonts/TorusPro-BoldItalic.woff2') format('woff2');
+  src: url('fonts/TorusPro-BoldItalic.woff2') format('woff2');
   font-weight: 700;
   font-style: italic;
 }
 
 @font-face {
   font-family: 'Torus';
-  src: url('./assets/fonts/TorusPro-Heavy.woff2') format('woff2');
+  src: url('fonts/TorusPro-Heavy.woff2') format('woff2');
   font-weight: 800;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Torus';
-  src: url('./assets/fonts/TorusPro-HeavyItalic.woff2') format('woff2');
+  src: url('fonts/TorusPro-HeavyItalic.woff2') format('woff2');
   font-weight: 800;
   font-style: italic;
 }
@@ -98,6 +98,8 @@
   --osu-bg-1: #1d1619;
   --osu-bg-2: #2b2126;
   --osu-bg-3: #48373f;
+  --score-main-bg: hsl(333, 10%, 30%);
+  --score-bg: hsl(333, 10%, 25%);
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
