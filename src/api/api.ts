@@ -97,7 +97,9 @@ export const fetchUserScoresData = async (username: string): Promise<Score[]> =>
             mods: score.mods,
             pp: score.pp,
             maxCombo: score.max_combo,
-            grade: score.grade
+            grade: score.grade,
+            weight: score.weight,
+            actualPP: score.actual_pp
         }));
     } catch (error) {
         if (error instanceof ApiError) {

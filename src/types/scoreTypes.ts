@@ -12,6 +12,8 @@ export interface Score {
     pp: number;
     maxCombo: number;
     grade: string;
+    weight: number;
+    actualPP: number;
 }
 
 export interface ScoreResponse {
@@ -27,6 +29,8 @@ export interface ScoreResponse {
     pp: number;
     max_combo: number;
     grade: string;
+    weight: number;
+    actual_pp: number;
 }
 
 export type GetUserScoresApiResponse = Array<ScoreResponse>

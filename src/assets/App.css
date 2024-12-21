@@ -79,3 +79,7 @@
 .tooltip {
   background-color: #1d1619;
 }
+
+.r_title::before {
+  background-color: hsl(333, 100%, 70%);
+}

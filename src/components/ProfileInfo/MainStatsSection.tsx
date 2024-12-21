@@ -22,11 +22,11 @@ function MainStatsSection(props: {user : User}) {
                 <div className="flex flex-row gap-4 items-center w-60 justify-between">
                     <div className="small-main-stats">
                         <p>Medals</p>
-                        <p className="small-main-stats-values font-light">{props.user.numMedals}</p>
+                        <p className="small-main-stats-values font-light">{props.user.numMedals.toLocaleString()}</p>
                     </div>
                     <div className="small-main-stats">
                         <p>pp</p>
-                        <p className="small-main-stats-values font-light">{props.user.pp.toFixed(0)}</p>
+                        <p className="small-main-stats-values font-light">{parseInt(props.user.pp.toFixed(0)).toLocaleString()}</p>
                     </div>
                     <div className="small-main-stats">
                         <p>Total Play Time</p>
