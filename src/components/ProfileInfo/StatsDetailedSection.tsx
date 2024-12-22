@@ -1,4 +1,4 @@
-import {UserStatistics} from "../../types/userTypes";
+import {UserStatistics} from "@/types/userTypes.ts";
 
 function StatsDetailedSection(props: {statistics : UserStatistics}) {
     const stats = [

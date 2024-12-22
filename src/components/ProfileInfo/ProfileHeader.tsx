@@ -1,5 +1,5 @@
-import {User} from "../../types/userTypes";
-import { getFlagUrl } from "../../assets/imageAssetPaths.ts";
+import {User} from "@/types/userTypes.ts";
+import { getFlagUrl } from "@/assets/imageAssetPaths.ts";
 import { Tooltip } from 'react-tooltip'
 
 function ProfileHeader(props: { user: User }) {

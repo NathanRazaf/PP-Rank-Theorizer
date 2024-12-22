@@ -1,5 +1,5 @@
-import { GradeCounts } from "../../types/userTypes";
-import { getGradeAssetPath } from "../../assets/imageAssetPaths.ts";
+import { GradeCounts } from "@/types/userTypes.ts";
+import { getGradeAssetPath } from "@/assets/imageAssetPaths.ts";
 
 function GradeCountsArray(props: { gradeCounts: GradeCounts }) {
     return (

@@ -1,6 +1,6 @@
-import {Score} from "../../types/scoreTypes";
+import {Score} from "@/types/scoreTypes.ts";
 import { Tooltip } from 'react-tooltip';
-import {getGradeAssetPath, getModAssetPath, getModName} from "../../assets/imageAssetPaths.ts";
+import {getGradeAssetPath, getModAssetPath, getModName} from "@/assets/imageAssetPaths.ts";
 import {
     differenceInDays,
     differenceInHours,
@@ -9,14 +9,21 @@ import {
     differenceInSeconds,
     differenceInYears
 } from "date-fns";
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import {MoreVertical} from "lucide-react";
 
 function SingleScoreInfo({ score, index }: { score: Score, index : number }) {
     return (
 
-        <div className="flex flex-row ml-6 bg-transparent">
+        <div className="flex flex-row ml-6 bg-transparent items-center h-11 group">
             <Tooltip id={`score-date-time-${index}`} opacity={1} className="z-50" style={{ backgroundColor: "#1d1619", padding: "5px 20px 5px 20px"}} />
             <Tooltip id={`score-decimal-pp-${index}`} opacity={1} className="z-50" style={{ backgroundColor: "#1d1619", padding: "5px 20px 5px 20px", fontSize: "12px"}} />
-            <div className="flex flex-row items-center min-w-0 w-0 flex-1 bg-score-main-bg rounded-bl-xl rounded-tl-xl">
+            <div className="flex flex-row items-center min-w-0 w-0 flex-1 bg-score-main-bg rounded-bl-xl rounded-tl-xl h-full">
                 <div className="pr-3 pl-5 flex-shrink-0">
                     <img
                         src={getGradeAssetPath(score.grade)}
@@ -42,13 +49,13 @@ function SingleScoreInfo({ score, index }: { score: Score, index : number }) {
                     </div>
                 </div>
             </div>
-            <div className="flex flex-row items-center flex-shrink-0">
-                <ModsArray mods={score.mods} />
+            <div className="flex flex-row items-center flex-shrink-0 h-full">
+                <ModsArray mods={score.mods} arrayIndex={index}/>
                 <div
                     className="flex flex-col items-start justify-center pl-4 pr-4 -mr-4 bg-score-main-bg h-full w-40"
                     style={{clipPath: "polygon(92% 0, 100% 50%, 92% 100%, 0% 100%, 0 0%)"}}
                 >
-                    <div className="flex flex-row items-center -mb-1 w-full">
+                    <div className="flex flex-row items-center w-full">
                         <span style={{color: "#fc2"}}
                               className="w-24 text-left font-semibold text-sm">{score.accuracy.toFixed(2)}%</span>
                         <span
@@ -69,30 +76,57 @@ function SingleScoreInfo({ score, index }: { score: Score, index : number }) {
                     </span>
                 </div>
             </div>
-            <div>
-
+            <div className="flex items-center pl-2 h-full">
+                <DropdownMenu>
+                    <DropdownMenuTrigger className="focus:outline-none hover:outline-none p-0 -mr-1 bg-transparent">
+                        <MoreVertical className="h-5 w-5"/>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end" className="w-36 border-none" style={{
+                        color: "white",
+                        backgroundColor: "#1d1619",
+                        padding: "5px 10px 5px 10px"
+                    }}>
+                        <DropdownMenuItem
+                            className="cursor-pointer text-start relative flex items-center pl-6 hover:!bg-osu-bg-2
+                            hover:!text-white before:absolute before:w-[3px] before:h-[0.8em]
+                            before:bg-[rgb(255,102,171)] before:rounded-full before:left-2
+                            before:content-[''] before:opacity-0 hover:before:opacity-100"
+                        >
+                            View Details
+                        </DropdownMenuItem>
+                    </DropdownMenuContent>
+                </DropdownMenu>
             </div>
         </div>
     );
 }
 
 
-function ModsArray({ mods }: { mods: string[] }) {
+function ModsArray({mods, arrayIndex}: { mods: string[], arrayIndex: number }) {
     return (
         <div className="flex gap-0 bg-score-main-bg h-full items-center">
             {mods.map((mod, index) => (
                 <div
                     key={index}
-                    className="relative group"
+                    className="relative"
+                    data-tooltip-id={`mod-tooltip-${getModAssetPath(mod)}-${arrayIndex}`}
+                    data-tooltip-content={getModName(mod)}
                 >
                     <img
                         src={getModAssetPath(mod)}
                         alt={mod}
-                        className="w-8 h-22 hover:scale-110 transition-transform"
+                        className="w-8 h-22"
                     />
-                    <div className="z-50 absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 tooltip text-white text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">
-                        {getModName(mod)}
-                    </div>
+                    <Tooltip
+                        id={`mod-tooltip-${getModAssetPath(mod)}-${arrayIndex}`}
+                        opacity={1}
+                        className="z-50"
+                        style={{
+                            backgroundColor: "#1d1619",
+                            padding: "5px 20px 5px 20px",
+                            fontSize: "12px"
+                        }}
+                    />
                 </div>
             ))}
         </div>

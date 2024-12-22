@@ -1,4 +1,4 @@
-import {User} from "../../types/userTypes";
+import {User} from "@/types/userTypes.ts";
 import MainStatsSection from "./MainStatsSection.tsx";
 import StatsDetailedSection from "./StatsDetailedSection.tsx";
 

@@ -1,4 +1,4 @@
-import { Score } from "../../types/scoreTypes";
+import { Score } from "@/types/scoreTypes.ts";
 import SingleScoreInfo from "./SingleScoreInfo.tsx";
 
 function ScoresInfo({ scores }: { scores: Score[] }) {

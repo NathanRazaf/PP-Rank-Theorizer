@@ -1,4 +1,4 @@
-import {User} from "../../types/userTypes";
+import {User} from "@/types/userTypes.ts";
 import RankHistory from "./RankHistory.tsx";
 import { Tooltip } from 'react-tooltip'
 import { GradeCountsArray } from "./GradeCounts.tsx";
