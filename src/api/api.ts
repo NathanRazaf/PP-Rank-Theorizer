@@ -21,7 +21,7 @@ export class ApiError extends Error {
     }
 }
 
-const API_BASE_URL = 'http://127.0.0.1:8000';
+const API_BASE_URL = 'https://osu-pp-theorizer-backend-production.up.railway.app';
 
 async function handleApiResponse<T>(response: Response): Promise<T> {
     if (!response.ok) {
