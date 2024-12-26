@@ -2,13 +2,13 @@ import {UserStatistics} from "@/types/userTypes.ts";
 
 function StatsDetailedSection(props: {statistics : UserStatistics}) {
     const stats = [
-        { key: 'ranked_score', label: 'Ranked Score', value: props.statistics.ranked_score.toLocaleString() },
+        { key: 'ranked_score', label: 'Ranked Score', value: props.statistics.rankedScore.toLocaleString() },
         { key: 'hit_accuracy', label: 'Hit Accuracy', value: props.statistics.accuracy.toFixed(2) + '%' },
-        { key: 'play_count', label: 'Play Count', value: props.statistics.play_count.toLocaleString() },
-        { key: 'total_score', label: 'Total Score', value: props.statistics.total_score.toLocaleString() },
-        { key: 'total_hits', label: 'Total Hits', value: props.statistics.total_hits.toLocaleString() },
-        { key: 'maximum_combo', label: 'Maximum Combo', value: props.statistics.maximum_combo.toLocaleString() },
-        { key: 'replays_watched', label: 'Replays Watched by Others', value: props.statistics.replays_watched.toLocaleString() }
+        { key: 'play_count', label: 'Play Count', value: props.statistics.playCount.toLocaleString() },
+        { key: 'total_score', label: 'Total Score', value: props.statistics.totalScore.toLocaleString() },
+        { key: 'total_hits', label: 'Total Hits', value: props.statistics.totalHits.toLocaleString() },
+        { key: 'maximum_combo', label: 'Maximum Combo', value: props.statistics.maximumCombo.toLocaleString() },
+        { key: 'replays_watched', label: 'Replays Watched by Others', value: props.statistics.replaysWatched.toLocaleString() }
     ];
 
     return (

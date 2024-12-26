@@ -1,3 +1,5 @@
+import {ScoreResponse} from "@/types/scoreTypes.ts";
+
 export interface User {
     username: string;
     avatarUrl: string;
@@ -18,6 +20,16 @@ export interface User {
 }
 
 export interface UserStatistics {
+    accuracy: number;
+    rankedScore: number;
+    totalScore: number;
+    replaysWatched: number;
+    totalHits: number;
+    maximumCombo: number;
+    playCount: number;
+}
+
+export interface UserApiStatistics {
     accuracy: number;
     ranked_score: number;
     total_score: number;
@@ -44,7 +56,7 @@ export interface GetUserApiResponse {
     country_name: string;
     num_medals: number;
     support_level: number;
-    statistics: UserStatistics;
+    statistics: UserApiStatistics;
     rank_history: number[];
     grade_counts: GradeCounts;
     pp: number;
@@ -52,4 +64,9 @@ export interface GetUserApiResponse {
     country_rank: number;
     level: number;
     level_progress: number;
+}
+
+export interface GetFullUserResponse {
+    profile: GetUserApiResponse
+    scores: ScoreResponse[]
 }

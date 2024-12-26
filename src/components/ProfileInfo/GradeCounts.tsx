@@ -2,10 +2,12 @@ import { GradeCounts } from "@/types/userTypes.ts";
 import { getGradeAssetPath } from "@/assets/imageAssetPaths.ts";
 
 function GradeCountsArray(props: { gradeCounts: GradeCounts }) {
+    const gradeOrder = ['SSH', 'SS', 'SH', 'S', 'A'];
     return (
         <div className="flex flex-row gap-1">
-            {Object.entries(props.gradeCounts).map(([grade, count]) => (
-                <SingleGradeCount key={grade} grade={grade} count={count} />
+            {gradeOrder.map(grade => (
+                // @ts-expect-error no error duh
+                <SingleGradeCount key={grade} grade={grade} count={props.gradeCounts[grade]} />
             ))}
         </div>
     );

@@ -1,5 +1,6 @@
 
 export interface Score {
+    isTrueScore: boolean;
     accuracy: number;
     score: number;
     beatmapUrl: string;
@@ -17,6 +18,7 @@ export interface Score {
 }
 
 export interface ScoreResponse {
+    is_true_score: boolean;
     accuracy: number;
     score: number;
     id: number;
@@ -33,4 +35,4 @@ export interface ScoreResponse {
     actual_pp: number;
 }
 
-export type GetUserScoresApiResponse = Array<ScoreResponse>
+export type GetUserScoresApiResponse = ScoreResponse[];
