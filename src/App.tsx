@@ -5,7 +5,7 @@ import { UserPage } from './pages/UserPage';
 const App = () => {
     return (
         <BrowserRouter>
-            <div className="osu-page mx-auto bg-osu-bg-2">
+            <div className="osu-page mx-auto my-0 bg-osu-bg-2">
                 <Routes>
                     <Route path="/" element={<HomePage />} />
                     <Route path="/users/:username" element={<UserPage />} />

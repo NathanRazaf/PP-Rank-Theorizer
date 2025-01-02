@@ -1,22 +1,21 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import ProfileInfo from "../components/ProfileInfo/ProfileInfo";
-import ScoresInfo from "../components/ScoresInfo/ScoresInfo.tsx";
-import SearchContainer from '../components/SearchContainer';
-import {
-    fetchUserData,
-    fetchUserScoresData,
-    FullUserUpdateParams,
-    simulateScore,
-    updateProfileWithScores
-} from '../api/api';
+import LoadingOverlay from '@/components/LoadingOverlay';
+import ProfileInfo from "@/components/ProfileInfo/ProfileInfo";
+import ScoresInfo from "@/components/ScoresInfo/ScoresInfo.tsx";
+import SearchUserModal from '@/components/UserSearchResults/SearchUserModal';
+import { fetchUserData, fetchUserScoresData } from "@/api/fetchUserDataApi.ts";
+import { simulateScore } from "@/api/scoreSimulatorApi.ts";
+import { FullUserUpdateParams, updateProfileWithScores } from "@/api/userUpdaterApi.ts";
 import { User } from '../types/userTypes';
 import { Score } from '../types/scoreTypes';
 import { ApiError } from '../api/api';
+import ScoreSimModal from "@/components/ScoreSimulForm/ScoreSimulModal.tsx";
 
 export const UserPage = () => {
     const { username } = useParams<{ username: string }>();
     const navigate = useNavigate();
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     const [userData, setUserData] = useState<User | null>(null);
     const [scoresData, setScoresData] = useState<Score[] | null>(null);
@@ -42,7 +41,6 @@ export const UserPage = () => {
         }
     };
 
-
     useEffect(() => {
         if (username) {
             fetchData(username).then(() => console.log("Data fetched"));
@@ -53,18 +51,22 @@ export const UserPage = () => {
         navigate(`/users/${newUsername}`);
     };
 
-    const handleAddScore = async () => {
+    const handleScoreSubmit = async (params: {
+        scoreId?: string;
+        beatmapId: number;
+        mods: string[];
+        accPercent?: number;
+        n50?: number;
+        n100?: number;
+        combo?: number;
+        nmiss?: number;
+        sliderTailMiss?: number;
+        largeTickMiss?: number
+    }) => {
         try {
-            const newScore = await simulateScore(
-                {
-                    beatmapId: 2245774,
-                    mods: ['HD', 'DT', 'HR'],
-                    accPercent: 100,
-                    nmiss: 0,
-                    combo: 192
-                }
-            );
-
+            setIsLoading(true);
+            setError(null);
+            const newScore = await simulateScore(params);
             const response = await updateProfileWithScores({
                 profile: userData,
                 scores: scoresData,
@@ -73,32 +75,47 @@ export const UserPage = () => {
 
             setUserData(response.profile);
             setScoresData(response.scores);
+            setIsModalOpen(false);
         } catch (err) {
             setError(err instanceof ApiError ? err.message : 'An unexpected error occurred');
+        } finally {
+            setIsLoading(false);
         }
-    }
+    };
 
     return (
-        <div className="flex flex-col items-center gap-4 py-4">
-            <h1 className="text-2xl font-bold">osu! Profile Viewer</h1>
-
-            <SearchContainer
-                onSearch={handleSearch}
-                isLoading={isLoading}
-            />
-
-            <button onClick={handleAddScore} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Add Score</button>
-
-            {error && (
-                <div className="text-red-500">
-                    Error: {error}
+        <>
+            <LoadingOverlay isLoading={isLoading} />
+            <div className="flex flex-col items-center gap-4 py-4">
+                <div className="w-full max-w-4xl flex items-center justify-between px-1">
+                    <h1 className="text-2xl font-bold">osu! Profile Viewer</h1>
+                    <SearchUserModal onSelectUser={handleSearch} />
                 </div>
-            )}
 
-            <div className="space-y-8">
-                {userData && <ProfileInfo user={userData} />}
-                {scoresData && <ScoresInfo scores={scoresData} />}
+                <button
+                    onClick={() => setIsModalOpen(true)}
+                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                >
+                    Add Score
+                </button>
+
+                <ScoreSimModal
+                    isOpen={isModalOpen}
+                    onClose={() => setIsModalOpen(false)}
+                    onSubmit={handleScoreSubmit}
+                />
+
+                {error && (
+                    <div className="text-red-500">
+                        Error: {error}
+                    </div>
+                )}
+
+                <div className="space-y-8">
+                    {userData && <ProfileInfo user={userData} />}
+                    {scoresData && <ScoresInfo scores={scoresData} />}
+                </div>
             </div>
-        </div>
+        </>
     );
 };

@@ -23,7 +23,7 @@ function SingleScoreInfo({ score, index }: { score: Score, index : number }) {
         <div className="flex flex-row ml-6 bg-transparent items-center h-11 group">
             <Tooltip id={`score-date-time-${index}`} opacity={1} className="z-50" style={{ backgroundColor: "#1d1619", padding: "5px 20px 5px 20px"}} />
             <Tooltip id={`score-decimal-pp-${index}`} opacity={1} className="z-50" style={{ backgroundColor: "#1d1619", padding: "5px 20px 5px 20px", fontSize: "12px"}} />
-            <div className="flex flex-row items-center min-w-0 w-0 flex-1 bg-score-main-bg rounded-bl-xl rounded-tl-xl h-full">
+            <div className="flex flex-row items-center min-w-0 w-0 flex-1 bg-score-main-bg group-hover:bg-[hsl(333,10%,35%)] rounded-bl-xl rounded-tl-xl h-full">
                 <div className="pr-3 pl-5 flex-shrink-0">
                     <img
                         src={getGradeAssetPath(score.grade)}
@@ -49,10 +49,12 @@ function SingleScoreInfo({ score, index }: { score: Score, index : number }) {
                     </div>
                 </div>
             </div>
-            <div className="flex flex-row items-center flex-shrink-0 h-full">
-                <ModsArray mods={score.mods} arrayIndex={index}/>
+            <div className="flex flex-row items-center flex-shrink-0 h-full group">
+                <div className="bg-score-main-bg group-hover:bg-[hsl(333,10%,35%)] h-full">
+                    <ModsArray mods={score.mods} arrayIndex={index}/>
+                </div>
                 <div
-                    className="flex flex-col items-start justify-center pl-4 pr-4 -mr-4 bg-score-main-bg h-full w-40"
+                    className="flex flex-col items-start justify-center pl-4 pr-4 -mr-4 bg-score-main-bg group-hover:bg-[hsl(333,10%,35%)] h-full w-40"
                     style={{clipPath: "polygon(92% 0, 100% 50%, 92% 100%, 0% 100%, 0 0%)"}}
                 >
                     <div className="flex flex-row items-center w-full">
@@ -64,8 +66,7 @@ function SingleScoreInfo({ score, index }: { score: Score, index : number }) {
                     <span className="text-xs text-left pr-6">weighted {score.weight.toFixed(0)}%</span>
                 </div>
                 <div
-                    style={{background: "hsl(333,10%,25%)"}}
-                    className="min-w-28 inline-flex items-center justify-center h-full rounded-br-xl rounded-tr-xl"
+                    className="min-w-28 inline-flex items-center bg-[hsl(333,10%,25%)] group-hover:bg-[hsl(333,10%,30%)] justify-center h-full rounded-br-xl rounded-tr-xl"
                     data-tooltip-id={`score-decimal-pp-${index}`}
                     data-tooltip-content={score.pp.toLocaleString()}
                     data-tooltip-place="top"
@@ -104,7 +105,7 @@ function SingleScoreInfo({ score, index }: { score: Score, index : number }) {
 
 function ModsArray({mods, arrayIndex}: { mods: string[], arrayIndex: number }) {
     return (
-        <div className="flex gap-0 bg-score-main-bg h-full items-center">
+        <div className="flex gap-0 bg-score-main-bg group-hover:bg-[hsl(333,10%,35%)] h-full items-center">
             {mods.map((mod, index) => (
                 <div
                     key={index}
@@ -145,7 +146,7 @@ const getTimeAgo = (dateString: string) => {
 
     const years = differenceInYears(nowUTC, dateUTC);
     const months = differenceInMonths(nowUTC, dateUTC);
-    const days = differenceInDays(nowUTC, dateUTC) + 1;
+    const days = differenceInDays(nowUTC, dateUTC);
     const hours = differenceInHours(nowUTC, dateUTC);
     const minutes = differenceInMinutes(nowUTC, dateUTC);
     const seconds = differenceInSeconds(nowUTC, dateUTC);

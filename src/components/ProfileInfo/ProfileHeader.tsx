@@ -5,8 +5,8 @@ import { Tooltip } from 'react-tooltip'
 function ProfileHeader(props: { user: User }) {
     return (
         <div className="flex flex-col m-0 bg-osu-bg-3 profile-header">
-            <Tooltip id="osu-supporter-tooltip" opacity={1} className="z-50" style={{ backgroundColor: "#1d1619", padding: "5px 20px 5px 20px"}} />
-            <Tooltip id="country-name-tooltip" opacity={1} className="z-50" style={{ backgroundColor: "#1d1619", padding: "5px 20px 5px 20px"}} />
+            <Tooltip id="osu-supporter-tooltip" opacity={1} className="z-20" style={{ backgroundColor: "#1d1619", padding: "5px 20px 5px 20px"}} />
+            <Tooltip id="country-name-tooltip" opacity={1} className="z-20" style={{ backgroundColor: "#1d1619", padding: "5px 20px 5px 20px"}} />
             <img
                 src={props.user.coverUrl}
                 alt="Cover"

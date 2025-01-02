@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import SearchContainer from '../components/SearchContainer';
+import SearchUserModal from '@/components/UserSearchResults/SearchUserModal';
 
 export const HomePage = () => {
     const navigate = useNavigate();
@@ -11,7 +11,7 @@ export const HomePage = () => {
     return (
         <div className="flex flex-col items-center gap-4 p-4">
             <h1 className="text-2xl font-bold">osu! Profile Viewer</h1>
-            <SearchContainer onSearch={handleSearch} isLoading={false} />
+            <SearchUserModal onSelectUser={handleSearch} />
         </div>
     );
 };
