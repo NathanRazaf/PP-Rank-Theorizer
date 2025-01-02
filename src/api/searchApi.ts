@@ -68,6 +68,6 @@ export async function searchBeatmapsets(query: string): Promise<CompactBeatmapse
             beatmapId: beatmap.beatmap_id,
             version: beatmap.version,
             stars: beatmap.stars
-        }))
+        })).sort((a, b) => a.stars - b.stars)
     }));
 }

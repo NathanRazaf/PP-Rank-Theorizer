@@ -9,7 +9,7 @@ const LoadingOverlay = ({ isLoading }: LoadingOverlayProps) => {
 
     return (
         <div
-            className="fixed inset-0 bg-black/30 backdrop-blur-sm z-50 flex items-center justify-center"
+            className="fixed inset-0 bg-black/30 backdrop-blur-sm z-[200] flex items-center justify-center"
             aria-busy="true"
             aria-label="Loading content"
         >

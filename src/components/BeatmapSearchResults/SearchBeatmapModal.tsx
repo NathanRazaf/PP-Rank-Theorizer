@@ -17,6 +17,7 @@ const SearchBeatmapModal = ({ onSelectBeatmap }: { onSelectBeatmap: (id: number)
 
     const handleSearch = async (e: React.FormEvent) => {
         e.preventDefault();
+        e.stopPropagation();
         if (!searchQuery.trim()) return;
 
         setIsSearching(true);
@@ -30,22 +31,21 @@ const SearchBeatmapModal = ({ onSelectBeatmap }: { onSelectBeatmap: (id: number)
         }
     };
 
-    const handleSelectBeatmapset = (beatmapset: CompactBeatmapset) => {
-        // For now, we'll just close the modal since the beatmap selection isn't implemented yet
-        setIsOpen(false);
-        setSearchQuery('');
-        setBeatmapsets([]);
-    };
 
     return (
         <>
             <button
+                type="button"
                 onClick={() => setIsOpen(true)}
                 className="p-2 rounded-lg bg-osu-bg-3 hover:bg-osu-bg-2 transition-all"
                 aria-label="Search beatmaps"
             >
                 <Search className="w-5 h-5" />
             </button>
+
+            {isOpen && (
+                <div className="fixed inset-0 bg-black bg-opacity-80 z-[140]" />
+            )}
 
             <Dialog open={isOpen} onOpenChange={setIsOpen}>
                 <DialogContent className="sm:max-w-xl z-[150]">
@@ -72,18 +72,22 @@ const SearchBeatmapModal = ({ onSelectBeatmap }: { onSelectBeatmap: (id: number)
                             </button>
                         </form>
 
-                        <div className="max-h-96 overflow-y-auto space-y-0 scrollbar-hide">
+                        <div className="max-h-96 overflow-y-auto space-y-1 scrollbar-hide">
                             {isSearching ? (
                                 <div className="text-center py-4 text-gray-500">Searching...</div>
                             ) : beatmapsets.length > 0 ? (
                                 beatmapsets.map((beatmapset) => (
-                                    <button
-                                        key={beatmapset.beatmapsetId}
-                                        onClick={() => handleSelectBeatmapset(beatmapset)}
-                                        className="w-full"
-                                    >
-                                        <CompactBeatmapsetItem beatmapset={beatmapset} />
-                                    </button>
+                                    <div key={beatmapset.beatmapsetId}>
+                                        <CompactBeatmapsetItem
+                                            beatmapset={beatmapset}
+                                            onSelectBeatmap={(beatmapId) => {
+                                                onSelectBeatmap(beatmapId);
+                                                setIsOpen(false);
+                                                setSearchQuery('');
+                                                setBeatmapsets([]);
+                                            }}
+                                        />
+                                    </div>
                                 ))
                             ) : searchQuery && !isSearching ? (
                                 <div className="text-center py-4 text-gray-500">No beatmaps found</div>
