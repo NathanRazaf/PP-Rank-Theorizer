@@ -33,7 +33,7 @@ const ScoreSimForm = ({ onSubmit, onClose }: { onSubmit: (score:
                                                                 largeTickMiss?: number
                                                           }) => void, onClose: () => void }) => {
     // Form mode state
-    const [isScoreIdMode, setIsScoreIdMode] = useState(true);
+    const [isScoreIdMode, setIsScoreIdMode] = useState(false);
     const [isClassicMode, setIsClassicMode] = useState(false);
 
     // Form fields state

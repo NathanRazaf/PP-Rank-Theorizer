@@ -1,7 +1,8 @@
 import { Score } from "@/types/scoreTypes.ts";
 import SingleScoreInfo from "./SingleScoreInfo.tsx";
 
-function ScoresInfo({ scores }: { scores: Score[] }) {
+function ScoresInfo({ scores, onDeleteFakeScore }:
+                    { scores: Score[], onDeleteFakeScore: (scoreId: number) => Promise<void> }) {
     return (
         <div className="space-y-4 m-2.5 rounded-lg flex flex-col p-4" style={{backgroundColor: "hsl(333,10%,20%)"}}>
             <h2
@@ -18,12 +19,21 @@ function ScoresInfo({ scores }: { scores: Score[] }) {
                 </span>
             </h3>
             <div className="flex flex-col gap-0.5">
-                {scores.map((score, index) => (
-                    <SingleScoreInfo key={index} score={score} index={index}/>
+                {filterScores({scores}).map((score, index) => (
+                    <SingleScoreInfo key={index} score={score} index={index} onDeleteFakeScore={onDeleteFakeScore}/>
                 ))}
             </div>
         </div>
     );
+}
+
+function filterScores({ scores }: {scores: Score[]}): Score[] {
+    // Print all scores after the 100th
+    if (scores.length > 100) {
+        console.log(scores.slice(100));
+    }
+    // Only return top 100 scores
+    return scores.slice(0, 100);
 }
 
 

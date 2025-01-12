@@ -6,7 +6,7 @@ import ScoresInfo from "@/components/ScoresInfo/ScoresInfo.tsx";
 import SearchUserModal from '@/components/UserSearchResults/SearchUserModal';
 import { fetchUserData, fetchUserScoresData } from "@/api/fetchUserDataApi.ts";
 import { simulateScore } from "@/api/scoreSimulatorApi.ts";
-import { FullUserUpdateParams, updateProfileWithScores } from "@/api/userUpdaterApi.ts";
+import {deleteFakeScore, FullUserUpdateParams, updateProfileWithScores} from "@/api/userUpdaterApi.ts";
 import { User } from '../types/userTypes';
 import { Score } from '../types/scoreTypes';
 import { ApiError } from '../api/api';
@@ -113,7 +113,27 @@ export const UserPage = () => {
 
                 <div className="space-y-8">
                     {userData && <ProfileInfo user={userData} />}
-                    {scoresData && <ScoresInfo scores={scoresData} />}
+                    {scoresData && <ScoresInfo
+                        scores={scoresData}
+                        onDeleteFakeScore={async (scoreId: number) => {
+                            try {
+                                setIsLoading(true);
+                                setError(null);
+                                const response = await deleteFakeScore({
+                                    profile: userData!,
+                                    scores: scoresData,
+                                    scoreId
+                                });
+                                setUserData(response.profile);
+                                setScoresData(response.scores);
+                            } catch (err) {
+                                console.log(err)
+                                setError(err instanceof ApiError ? err.message : 'An unexpected error occurred');
+                            } finally {
+                                setIsLoading(false);
+                            }
+                        }}
+                    />}
                 </div>
             </div>
         </>

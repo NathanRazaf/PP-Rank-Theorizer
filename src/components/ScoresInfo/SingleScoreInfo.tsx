@@ -16,8 +16,29 @@ import {
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import {MoreVertical} from "lucide-react";
+import {
+    AlertDialog,
+    AlertDialogAction,
+    AlertDialogCancel,
+    AlertDialogContent,
+    AlertDialogDescription,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogTitle
+} from "@/components/ui/alert-dialog";
+import React from "react";
 
-function SingleScoreInfo({ score, index }: { score: Score, index : number }) {
+function SingleScoreInfo({ score, index, onDeleteFakeScore }:
+                         { score: Score, index : number, onDeleteFakeScore: (scoreId: number) => Promise<void> }) {
+    const [isDeleteDialogOpen, setIsDeleteDialogOpen] = React.useState(false);
+    const [isDropdownOpen, setIsDropdownOpen] = React.useState(false);
+
+    const handleDelete = async () => {
+        await onDeleteFakeScore(score.id);
+        setIsDeleteDialogOpen(false);
+        setIsDropdownOpen(false);  // Close dropdown
+    };
+
     return (
 
         <div className="flex flex-row ml-6 bg-transparent items-center h-11 group">
@@ -77,8 +98,9 @@ function SingleScoreInfo({ score, index }: { score: Score, index : number }) {
                     </span>
                 </div>
             </div>
+            {/* Actions menu with delete confirmation */}
             <div className="flex items-center pl-2 h-full">
-                <DropdownMenu>
+                <DropdownMenu open={isDropdownOpen} onOpenChange={setIsDropdownOpen}>
                     <DropdownMenuTrigger className="focus:outline-none hover:outline-none p-0 -mr-1 bg-transparent">
                         <MoreVertical className="h-5 w-5"/>
                     </DropdownMenuTrigger>
@@ -88,16 +110,54 @@ function SingleScoreInfo({ score, index }: { score: Score, index : number }) {
                         padding: "5px 10px 5px 10px",
                         borderRadius: "5px",
                     }}>
-                        <DropdownMenuItem
-                            className="cursor-pointer text-start relative flex items-center pl-6 hover:!bg-osu-bg-2
-                            hover:!text-white before:absolute before:w-[3px] before:h-[0.8em]
-                            before:bg-[rgb(255,102,171)] before:rounded-full before:left-2
-                            before:content-[''] before:opacity-0 hover:before:opacity-100"
-                        >
-                            View Details
-                        </DropdownMenuItem>
+                        {score.isTrueScore ? (
+                            <DropdownMenuItem
+                                className="cursor-pointer text-start relative flex items-center pl-6 hover:!bg-osu-bg-2
+                    hover:!text-white before:absolute before:w-[3px] before:h-[0.8em]
+                    before:bg-[rgb(255,102,171)] before:rounded-full before:left-2
+                    before:content-[''] before:opacity-0 hover:before:opacity-100"
+                                onClick={() => window.open(`https://osu.ppy.sh/scores/${score.id}`)}
+                            >
+                                View Details
+                            </DropdownMenuItem>
+                        ) : (
+                            <DropdownMenuItem
+                                className="cursor-pointer text-start relative flex items-center pl-6 hover:!bg-osu-bg-2
+                    hover:!text-white before:absolute before:w-[3px] before:h-[0.8em]
+                    before:bg-[rgb(255,102,171)] before:rounded-full before:left-2
+                    before:content-[''] before:opacity-0 hover:before:opacity-100"
+                                onClick={() => {
+                                    setIsDropdownOpen(false);  // Close dropdown
+                                    setIsDeleteDialogOpen(true);  // Open dialog
+                                }}
+                            >
+                                Delete Play
+                            </DropdownMenuItem>
+                        )}
                     </DropdownMenuContent>
                 </DropdownMenu>
+
+                <AlertDialog open={isDeleteDialogOpen} onOpenChange={setIsDeleteDialogOpen}>
+                    <AlertDialogContent className="bg-[#1d1619] border-none">
+                        <AlertDialogHeader>
+                            <AlertDialogTitle className="text-white">Delete Score</AlertDialogTitle>
+                            <AlertDialogDescription className="text-gray-400">
+                                Are you sure you want to delete this score? This action cannot be undone.
+                            </AlertDialogDescription>
+                        </AlertDialogHeader>
+                        <AlertDialogFooter>
+                            <AlertDialogCancel className="bg-gray-700 hover:bg-gray-600 border-none text-white">
+                                Cancel
+                            </AlertDialogCancel>
+                            <AlertDialogAction
+                                onClick={handleDelete}
+                                className="bg-red-600 hover:bg-red-500 border-none text-white"
+                            >
+                                Delete
+                            </AlertDialogAction>
+                        </AlertDialogFooter>
+                    </AlertDialogContent>
+                </AlertDialog>
             </div>
         </div>
     );
@@ -106,7 +166,8 @@ function SingleScoreInfo({ score, index }: { score: Score, index : number }) {
 
 function ModsArray({mods, arrayIndex, isTrueScore}: { mods: string[], arrayIndex: number, isTrueScore: boolean }) {
     return (
-        <div className={`flex gap-0 ${isTrueScore ? 'bg-score-main-bg group-hover:bg-[hsl(333,10%,35%)]' : 'bg-[hsl(250,10%,30%)] group-hover:bg-[hsl(250,10%,35%)]'} h-full items-center`}>
+        <div
+            className={`flex gap-0 ${isTrueScore ? 'bg-score-main-bg group-hover:bg-[hsl(333,10%,35%)]' : 'bg-[hsl(250,10%,30%)] group-hover:bg-[hsl(250,10%,35%)]'} h-full items-center`}>
             {mods.map((mod, index) => (
                 <div
                     key={index}
@@ -174,7 +235,7 @@ const getTimeAgo = (dateString: string) => {
 };
 
 
-function getLocalDateTime (dateString: string) {
+function getLocalDateTime(dateString: string) {
     const date = new Date(dateString);
 
     // Get month name
