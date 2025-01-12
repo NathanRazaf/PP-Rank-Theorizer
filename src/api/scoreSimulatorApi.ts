@@ -16,7 +16,7 @@ export const simulateScore = async ({
                                         largeTickMiss = 0,
                                     }: ScoreParams): Promise<Score> => {
     try {
-        const response = await fetch(`${API_BASE_URL}/pp/simulate`, {
+        const response = await fetch(`${API_BASE_URL}/score/simulate`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
