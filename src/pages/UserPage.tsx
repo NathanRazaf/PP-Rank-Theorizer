@@ -6,16 +6,19 @@ import ScoresInfo from "@/components/ScoresInfo/ScoresInfo.tsx";
 import SearchUserModal from '@/components/UserSearchResults/SearchUserModal';
 import { fetchUserData, fetchUserScoresData } from "@/api/fetchUserDataApi.ts";
 import { simulateScore } from "@/api/scoreSimulatorApi.ts";
-import {deleteFakeScore, FullUserUpdateParams, updateProfileWithScores} from "@/api/userUpdaterApi.ts";
+import {deleteFakeScore, updateProfileWithScores} from "@/api/userUpdaterApi.ts";
 import { User } from '../types/userTypes';
 import { Score } from '../types/scoreTypes';
 import { ApiError } from '../api/api';
 import ScoreSimModal from "@/components/ScoreSimulForm/ScoreSimulModal.tsx";
+import ScorePreviewDialog from "@/components/ScoreSimulForm/ScorePreviewDialog.tsx";
 
 export const UserPage = () => {
     const { username } = useParams<{ username: string }>();
     const navigate = useNavigate();
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [previewScore, setPreviewScore] = useState<Score | null>(null);
+    const [isPreviewOpen, setIsPreviewOpen] = useState(false);
 
     const [userData, setUserData] = useState<User | null>(null);
     const [scoresData, setScoresData] = useState<Score[] | null>(null);
@@ -51,6 +54,7 @@ export const UserPage = () => {
         navigate(`/users/${newUsername}`);
     };
 
+    // Update the handleScoreSubmit function
     const handleScoreSubmit = async (params: {
         scoreId?: string;
         beatmapId: number;
@@ -67,15 +71,9 @@ export const UserPage = () => {
             setIsLoading(true);
             setError(null);
             const newScore = await simulateScore(params);
-            const response = await updateProfileWithScores({
-                profile: userData,
-                scores: scoresData,
-                newScore: newScore
-            } as FullUserUpdateParams);
-
-            setUserData(response.profile);
-            setScoresData(response.scores);
+            setPreviewScore(newScore);
             setIsModalOpen(false);
+            setIsPreviewOpen(true);
         } catch (err) {
             setError(err instanceof ApiError ? err.message : 'An unexpected error occurred');
         } finally {
@@ -104,6 +102,32 @@ export const UserPage = () => {
                     onClose={() => setIsModalOpen(false)}
                     onSubmit={handleScoreSubmit}
                 />
+
+                {previewScore && userData && scoresData && (
+                    <ScorePreviewDialog
+                        isOpen={isPreviewOpen}
+                        onClose={() => setIsPreviewOpen(false)}
+                        score={previewScore}
+                        onConfirm={async () => {
+                            try {
+                                setIsLoading(true);
+                                const response = await updateProfileWithScores({
+                                    profile: userData,
+                                    scores: scoresData,
+                                    newScore: previewScore
+                                });
+                                setUserData(response.profile);
+                                setScoresData(response.scores);
+                            } catch (err) {
+                                console.error('Error updating profile with scores:', err);
+                            } finally {
+                                setIsLoading(false);
+                                setIsPreviewOpen(false);
+                            }
+                        }}
+                        isLoading={isLoading}
+                    />
+                )}
 
                 {error && (
                     <div className="text-red-500">

@@ -37,10 +37,13 @@ const SearchBeatmapModal = ({ onSelectBeatmap }: { onSelectBeatmap: (id: number)
             <button
                 type="button"
                 onClick={() => setIsOpen(true)}
-                className="p-2 rounded-lg bg-osu-bg-3 hover:bg-osu-bg-2 transition-all"
+                className="p-2 rounded-xl bg-osu-bg-3 hover:bg-osu-bg-2 transition-all"
                 aria-label="Search beatmaps"
             >
-                <Search className="w-5 h-5" />
+                <div className="flex flex-row items-center gap-2">
+                    <span>Search beatmaps   </span>
+                    <Search className="w-5 h-5" />
+                </div>
             </button>
 
             {isOpen && (
