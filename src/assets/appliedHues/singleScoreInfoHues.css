@@ -1,0 +1,25 @@
+.ssi-true {
+    background-color: hsl(var(--base-hue), 10%, 30%);
+}
+.ssi-true-accent {
+    background-color: hsl(var(--base-hue), 10%, 25%);
+}
+.group:hover .ssi-true {
+    background-color: hsl(var(--base-hue), 10%, 35%);
+}
+.group:hover .ssi-true-accent {
+    background-color: hsl(var(--base-hue), 10%, 30%);
+}
+
+.ssi-false {
+    background-color: hsl(var(--false-score-hue), 10%, 30%);
+}
+.ssi-false-accent {
+    background-color: hsl(var(--false-score-hue), 10%, 25%);
+}
+.group:hover .ssi-false {
+    background-color: hsl(var(--false-score-hue), 10%, 35%);
+}
+.group:hover .ssi-false-accent {
+    background-color: hsl(var(--false-score-hue), 10%, 30%);
+}

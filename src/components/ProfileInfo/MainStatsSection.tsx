@@ -6,20 +6,27 @@ import { GradeCountsArray } from "./GradeCounts.tsx";
 function MainStatsSection(props: {user : User}) {
     return (
         <div className="flex flex-col">
-            <Tooltip id="play-time" opacity={1} className="z-50" style={{ backgroundColor: "#1d1619", padding: "5px 20px 5px 20px"}} />
-            <div className="flex flex-row items-center gap-4">
-                <div className="ranking-value">
+            <Tooltip id="play-time" opacity={1} className="z-50" style={{ backgroundColor: "var(--dropdown-bg)", padding: "5px 20px 5px 20px"}} />
+
+            {/* Ranking section - responsive layout */}
+            <div className="flex flex-row items-center gap-4 w-full">
+                <div className="ranking-value w-1/2 md:w-auto">
                     <p>Global Ranking</p>
-                    <p className="r-number">#{props.user.globalRank.toLocaleString()}</p>
+                    <p className="r-number">#{props.user.globalRank?.toLocaleString() ?? '-'}</p>
                 </div>
-                <div className="ranking-value">
+                <div className="ranking-value w-1/2 md:w-auto">
                     <p>Country Ranking</p>
-                    <p className="r-number">#{props.user.countryRank.toLocaleString()}</p>
+                    <p className="r-number">#{props.user.countryRank?.toLocaleString() ?? '-'}</p>
                 </div>
             </div>
+
+            {/* Rank history - full width */}
             <RankHistory rankHistory={props.user.rankHistory} />
-            <div className="flex flex-row justify-between">
-                <div className="flex flex-row gap-4 items-center w-60 justify-between">
+
+            {/* Stats and grades - responsive layout */}
+            <div className="flex flex-col md:flex-row justify-between gap-4 md:gap-0">
+                {/* Medals, PP, Play Time */}
+                <div className="flex flex-row w-full justify-between md:w-60 md:justify-between">
                     <div className="small-main-stats">
                         <p>Medals</p>
                         <p className="small-main-stats-values font-light">{props.user.numMedals.toLocaleString()}</p>
@@ -31,13 +38,15 @@ function MainStatsSection(props: {user : User}) {
                     <div className="small-main-stats">
                         <p>Total Play Time</p>
                         <p className="small-main-stats-values font-light"
-                            data-tooltip-id="play-time"
-                            data-tooltip-content={convertSecondsToHours(props.user.playTime) + " hours"}
-                            data-tooltip-place="bottom"
+                           data-tooltip-id="play-time"
+                           data-tooltip-content={convertSecondsToHours(props.user.playTime) + " hours"}
+                           data-tooltip-place="bottom"
                         >{convertSecondsToTime(props.user.playTime)}</p>
                     </div>
                 </div>
-                <div>
+
+                {/* Grade Counts - centered on mobile */}
+                <div className="flex justify-center md:justify-start">
                     <GradeCountsArray gradeCounts={props.user.gradeCounts} />
                 </div>
             </div>
@@ -59,6 +68,5 @@ function convertSecondsToTime(totalSeconds: number) {
 function convertSecondsToHours(totalSeconds: number) {
     return (totalSeconds / 3600).toFixed(0);
 }
-
 
 export default MainStatsSection

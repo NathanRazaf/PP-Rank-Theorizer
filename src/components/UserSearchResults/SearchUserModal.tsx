@@ -48,7 +48,7 @@ const SearchModal = ({ onSelectUser }: { onSelectUser: (username: string) => voi
             </button>
 
             <Dialog open={isOpen} onOpenChange={setIsOpen}>
-                <DialogContent className="sm:max-w-xl">
+                <DialogContent className="sm:max-w-xl search-dialog">
                     <DialogHeader>
                         <DialogTitle>Search Users</DialogTitle>
                     </DialogHeader>
@@ -60,7 +60,7 @@ const SearchModal = ({ onSelectUser }: { onSelectUser: (username: string) => voi
                                 value={searchQuery}
                                 onChange={(e) => setSearchQuery(e.target.value)}
                                 placeholder="Search by username..."
-                                className="w-full px-4 py-2 rounded-lg !bg-osu-bg-3 focus:outline-none"
+                                className="w-full px-4 py-2 rounded-lg search-dialog-input focus:outline-none"
                                 autoComplete="off"
                             />
                             <button

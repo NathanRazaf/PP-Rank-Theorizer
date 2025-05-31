@@ -55,8 +55,8 @@ export async function searchUsers(query: string): Promise<CompactUser[]> {
     }));
 }
 
-export async function searchBeatmapsets(query: string): Promise<CompactBeatmapset[]> {
-    const response = await fetch(`${API_BASE_URL}/search/beatmap?query=${encodeURIComponent(query)}`);
+export async function searchBeatmapsets(query: string, mode: number): Promise<CompactBeatmapset[]> {
+    const response = await fetch(`${API_BASE_URL}/search/beatmap?query=${encodeURIComponent(query)}&mode=${mode}`);
     const r = await handleApiResponse<CompactBeatmapsetResponse[]>(response);
     return r.map((beatmapset) => ({
         beatmapsetId: beatmapset.beatmapset_id,

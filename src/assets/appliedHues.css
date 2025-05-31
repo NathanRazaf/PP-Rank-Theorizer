@@ -1,0 +1,26 @@
+@import './appliedHues/searchDialogHues.css';
+@import './appliedHues/addScoreHues.css';
+@import './appliedHues/singleScoreInfoHues.css';
+
+.confirm-dialog {
+    background-color: hsl(var(--dialog-hue), 10%, 20%) !important;
+}
+
+.confirm-button {
+    background-color: hsl(var(--confirm-hue), 10%, 25%) !important;
+}
+.confirm-button:hover {
+    background-color: hsl(var(--confirm-hue), 10%, 30%) !important;
+}
+.cancel-button {
+    background-color: hsl(var(--cancel-hue), 10%, 25%) !important;
+}
+.cancel-button:hover {
+    background-color: hsl(var(--cancel-hue), 10%, 30%) !important;
+}
+
+.ssi-dd-menu::before {
+    background-color: hsl(var(--base-hue), 100%, 70%);
+}
+
+

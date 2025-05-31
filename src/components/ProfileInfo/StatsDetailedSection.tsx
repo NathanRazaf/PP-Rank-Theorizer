@@ -14,9 +14,9 @@ function StatsDetailedSection(props: {statistics : UserStatistics}) {
     return (
         <div className="grid gap-1 text-xs font-normal">
             {stats.map(stat => (
-                <dl key={stat.key} className="grid grid-cols-11 gap-3">
-                    <dt className="text-start col-start-1 col-end-8">{stat.label}</dt>
-                    <dd className="text-start col-start-9 col-end-11">{stat.value}</dd>
+                <dl key={stat.key} className="grid grid-cols-2 md:grid-cols-11 gap-3">
+                    <dt className="text-start col-span-1 md:col-start-1 md:col-end-8">{stat.label}</dt>
+                    <dd className="text-start col-span-1 md:col-start-9 md:col-end-11">{stat.value}</dd>
                 </dl>
             ))}
         </div>

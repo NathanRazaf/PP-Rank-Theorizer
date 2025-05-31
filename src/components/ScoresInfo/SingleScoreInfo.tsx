@@ -42,9 +42,9 @@ function SingleScoreInfo({ score, index, onDeleteFakeScore }:
     return (
 
         <div className="flex flex-row ml-6 bg-transparent items-center h-11 group">
-            <Tooltip id={`score-date-time-${index}`} opacity={1} className="z-50" style={{ backgroundColor: "#1d1619", padding: "5px 20px 5px 20px"}} />
-            <Tooltip id={`score-decimal-pp-${index}`} opacity={1} className="z-50" style={{ backgroundColor: "#1d1619", padding: "5px 20px 5px 20px", fontSize: "12px"}} />
-            <div className={`flex flex-row items-center min-w-0 w-0 flex-1 ${score.isTrueScore ? 'bg-score-main-bg group-hover:bg-[hsl(333,10%,35%)]' : 'bg-[hsl(250,10%,30%)] group-hover:bg-[hsl(250,10%,35%)]'} rounded-bl-xl rounded-tl-xl h-full`}>
+            <Tooltip id={`score-date-time-${index}`} opacity={1} className="z-50" style={{ backgroundColor: "var(--dropdown-bg)", padding: "5px 20px 5px 20px"}} />
+            <Tooltip id={`score-decimal-pp-${index}`} opacity={1} className="z-50" style={{ backgroundColor: "var(--dropdown-bg)", padding: "5px 20px 5px 20px", fontSize: "12px"}} />
+            <div className={`flex flex-row items-center min-w-0 w-0 flex-1 ${score.isTrueScore ? 'ssi-true' : 'ssi-false'} rounded-bl-xl rounded-tl-xl h-full`}>
                 <div className="pr-3 pl-5 flex-shrink-0">
                     <img
                         src={getGradeAssetPath(score.grade)}
@@ -60,7 +60,7 @@ function SingleScoreInfo({ score, index, onDeleteFakeScore }:
                     <div className="flex flex-row gap-4 items-center">
                         <span style={{color: "#ea0"}} className="text-xs">{score.version}</span>
                         <span
-                            style={{color: "hsl(333,10%,60%)"}} className="text-xs"
+                            style={{color: "hsl(var(--base-hue),10%,60%)"}} className="text-xs"
                             data-tooltip-id={`score-date-time-${index}`}
                             data-tooltip-html = {getLocalDateTime(score.date)}
                             data-tooltip-place="top"
@@ -75,7 +75,7 @@ function SingleScoreInfo({ score, index, onDeleteFakeScore }:
                     <ModsArray mods={score.mods} arrayIndex={index} isTrueScore={score.isTrueScore}/>
                 </div>
                 <div
-                    className={`flex flex-col items-start justify-center pl-4 pr-4 -mr-4 ${score.isTrueScore ? 'bg-score-main-bg group-hover:bg-[hsl(333,10%,35%)]' : 'bg-[hsl(250,10%,30%)] group-hover:bg-[hsl(250,10%,35%)]'} h-full w-40`}
+                    className={`flex flex-col items-start justify-center pl-4 pr-4 -mr-4 ${score.isTrueScore ? 'ssi-true' : 'ssi-false'} h-full w-40`}
                     style={{clipPath: "polygon(92% 0, 100% 50%, 92% 100%, 0% 100%, 0 0%)"}}
                 >
                     <div className="flex flex-row items-center w-full">
@@ -87,14 +87,14 @@ function SingleScoreInfo({ score, index, onDeleteFakeScore }:
                     <span className="text-xs text-left pr-6">weighted {score.weight.toFixed(0)}%</span>
                 </div>
                 <div
-                    className={`min-w-28 inline-flex items-center ${score.isTrueScore ? 'bg-[hsl(333,10%,25%)] group-hover:bg-[hsl(333,10%,30%)]' : 'bg-[hsl(250,10%,25%)] group-hover:bg-[hsl(250,10%,30%)]'} justify-center h-full rounded-br-xl rounded-tr-xl`}
+                    className={`min-w-28 inline-flex items-center ${score.isTrueScore ? 'ssi-true-accent' : 'ssi-false-accent'} justify-center h-full rounded-br-xl rounded-tr-xl`}
                     data-tooltip-id={`score-decimal-pp-${index}`}
                     data-tooltip-content={score.pp.toLocaleString()}
                     data-tooltip-place="top"
                 >
-                    <span className="text-base font-semibold pl-3" style={{color: "hsl(333,100%,70%)"}}>
+                    <span className="text-base font-semibold pl-3" style={{color: "hsl(var(--base-hue),100%,70%)"}}>
                         {parseInt(score.pp.toFixed(0)).toLocaleString()}
-                        <span className="text-xs font-semibold" style={{color: "hsl(333,40%,70%)"}}>pp</span>
+                        <span className="text-xs font-semibold" style={{color: "hsl(var(--base-hue),40%,70%)"}}>pp</span>
                     </span>
                 </div>
             </div>
@@ -106,7 +106,7 @@ function SingleScoreInfo({ score, index, onDeleteFakeScore }:
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end" className="w-36 border-none" style={{
                         color: "white",
-                        backgroundColor: "#1d1619",
+                        backgroundColor: "var(--dropdown-bg)",
                         padding: "5px 10px 5px 10px",
                         borderRadius: "5px",
                     }}>
@@ -114,7 +114,7 @@ function SingleScoreInfo({ score, index, onDeleteFakeScore }:
                             <DropdownMenuItem
                                 className="cursor-pointer text-start relative flex items-center pl-6 hover:!bg-osu-bg-2
                     hover:!text-white before:absolute before:w-[3px] before:h-[0.8em]
-                    before:bg-[rgb(255,102,171)] before:rounded-full before:left-2
+                    ssi-dd-menu before:rounded-full before:left-2
                     before:content-[''] before:opacity-0 hover:before:opacity-100"
                                 onClick={() => window.open(`https://osu.ppy.sh/scores/${score.id}`)}
                             >
@@ -124,7 +124,7 @@ function SingleScoreInfo({ score, index, onDeleteFakeScore }:
                             <DropdownMenuItem
                                 className="cursor-pointer text-start relative flex items-center pl-6 hover:!bg-osu-bg-2
                     hover:!text-white before:absolute before:w-[3px] before:h-[0.8em]
-                    before:bg-[rgb(255,102,171)] before:rounded-full before:left-2
+                    ssi-dd-menu before:rounded-full before:left-2
                     before:content-[''] before:opacity-0 hover:before:opacity-100"
                                 onClick={() => {
                                     setIsDropdownOpen(false);  // Close dropdown
@@ -138,7 +138,7 @@ function SingleScoreInfo({ score, index, onDeleteFakeScore }:
                 </DropdownMenu>
 
                 <AlertDialog open={isDeleteDialogOpen} onOpenChange={setIsDeleteDialogOpen}>
-                    <AlertDialogContent className="bg-[#1d1619] border-none">
+                    <AlertDialogContent className="border-none" style={{backgroundColor: "var(--dropdown-bg)"}}>
                         <AlertDialogHeader>
                             <AlertDialogTitle className="text-white">Delete Score</AlertDialogTitle>
                             <AlertDialogDescription className="text-gray-400">
@@ -167,7 +167,7 @@ function SingleScoreInfo({ score, index, onDeleteFakeScore }:
 function ModsArray({mods, arrayIndex, isTrueScore}: { mods: string[], arrayIndex: number, isTrueScore: boolean }) {
     return (
         <div
-            className={`flex gap-0 ${isTrueScore ? 'bg-score-main-bg group-hover:bg-[hsl(333,10%,35%)]' : 'bg-[hsl(250,10%,30%)] group-hover:bg-[hsl(250,10%,35%)]'} h-full items-center`}>
+            className={`flex gap-0 ${isTrueScore ? 'ssi-true' : 'ssi-false'} h-full items-center`}>
             {mods.map((mod, index) => (
                 <div
                     key={index}
@@ -185,7 +185,7 @@ function ModsArray({mods, arrayIndex, isTrueScore}: { mods: string[], arrayIndex
                         opacity={1}
                         className="z-50"
                         style={{
-                            backgroundColor: "#1d1619",
+                            backgroundColor: "var(--dropdown-bg)",
                             padding: "5px 20px 5px 20px",
                             fontSize: "12px"
                         }}
@@ -262,7 +262,7 @@ function getLocalDateTime(dateString: string) {
     return (
         `<div class="text-xs">
             <span class="font-semibold">${day} ${month} ${year} 
-            <span class="font-normal" style="color: hsl(333,40%,70%)">${hours}:${minutes}:${seconds} UTC ${offsetSign}${offsetHours}</span>
+            <span class="font-normal" style="color: hsl(var(--base-hue),40%,70%)">${hours}:${minutes}:${seconds} UTC ${offsetSign}${offsetHours}</span>
         </div>`
     )
 }

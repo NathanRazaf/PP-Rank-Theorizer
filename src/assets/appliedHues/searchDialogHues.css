@@ -1,0 +1,24 @@
+.search-dialog {
+    background-color: hsl(var(--search-hue), 14%, 10%) !important;
+}
+
+.search-dialog-input {
+    background-color: hsl(var(--search-hue), 10%, 25%) !important;
+}
+
+.search-item {
+    background-color: hsl(var(--search-hue), 10%, 20%);
+}
+.search-item:hover {
+    background-color: hsl(var(--search-hue), 10%, 25%);
+}
+.search-text {
+    color: hsl(var(--search-hue), 40%, 90%);
+}
+
+.sub-search-item {
+    background-color: hsl(var(--search-hue), 10%, 25%);
+}
+.sub-search-item:hover {
+    background-color: hsl(var(--search-hue), 10%, 30%);
+}

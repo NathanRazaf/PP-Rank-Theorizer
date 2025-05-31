@@ -1,6 +1,9 @@
 import {ScoreResponse} from "@/types/scoreTypes.ts";
+import {GameMode} from "@/components/ProfileInfo/GameModeTab.tsx";
 
 export interface User {
+    id: number;
+    preferredMode: GameMode;
     username: string;
     avatarUrl: string;
     coverUrl: string;
@@ -48,7 +51,9 @@ export interface GradeCounts {
 }
 
 export interface GetUserApiResponse {
+    id: number;
     username: string;
+    preferred_mode: GameMode;
     avatar_url: string;
     cover_url: string;
     country_code: string;

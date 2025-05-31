@@ -2,13 +2,15 @@ import {GetUserApiResponse, User} from "@/types/userTypes.ts";
 import {GetUserScoresApiResponse, Score} from "@/types/scoreTypes.ts";
 import {API_BASE_URL, ApiError, handleApiResponse} from "@/api/api.ts";
 
-export const fetchUserData = async (username: string): Promise<User> => {
+export const fetchUserData = async (username: string, mode: string): Promise<User> => {
     try {
         const data = await handleApiResponse<GetUserApiResponse>(
-            await fetch(`${API_BASE_URL}/user/${username}`)
+            await fetch(`${API_BASE_URL}/user/info/${username}/${mode}`)
         );
 
         return {
+            id: data.id,
+            preferredMode: data.preferred_mode,
             username: data.username,
             avatarUrl: data.avatar_url,
             coverUrl: data.cover_url,
@@ -46,10 +48,10 @@ export const fetchUserData = async (username: string): Promise<User> => {
     }
 };
 
-export const fetchUserScoresData = async (username: string): Promise<Score[]> => {
+export const fetchUserScoresData = async (username: string, mode: string): Promise<Score[]> => {
     try {
         const data = await handleApiResponse<GetUserScoresApiResponse>(
-            await fetch(`${API_BASE_URL}/user/${username}/scores`)
+            await fetch(`${API_BASE_URL}/user/scores/${username}/${mode}`)
         );
 
         return data.map(score => ({

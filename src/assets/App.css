@@ -1,14 +1,8 @@
+@import "allStatsSection.css";
+
 #root {
   margin: 0 auto;
   text-align: center;
-}
-
-
-@media (min-width: 900px) {
-  .osu-page {
-    max-width: 1000px;
-    width: calc(100% - 40px);
-  }
 }
 
 .osu-page {
@@ -42,37 +36,9 @@
 }
 
 .supporter-container {
-  background-color: hsl(333, 100%, 70%);
+  background-color: hsl(var(--base-hue), 100%, 70%);
   padding: 0 8px 0 8px;
   border-radius: 16px;
-}
-
-.ranking-value {
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-  font-size: 12px;
-  line-height: 1;
-}
-
-.ranking-value .r-number {
-  color: #f3d8e5;
-  font-size: 30px;
-  font-weight: 300;
-  letter-spacing: -0.05rem;
-}
-
-.small-main-stats {
-  font-size: 12px;
-  line-height: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-}
-
-.small-main-stats-values {
-  color: hsl(333, 40%, 90%);
-  font-size: 16px;
 }
 
 .tooltip {
@@ -80,5 +46,39 @@
 }
 
 .r_title::before {
-  background-color: hsl(333, 100%, 70%);
+  background-color: hsl(var(--base-hue), 100%, 70%);
+}
+
+.floating-button {
+  position: fixed;
+  bottom: 3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  background-color: var(--osu-bg-3);
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .75);
+  padding: 0.5rem 1rem;
+  transition: all .2s;
+}
+
+.floating-button:hover {
+  background-color: var(--osu-bg-2);
+}
+
+.hue-dropdown {
+  position: absolute;
+    top: 0;
+    left: 0;
+}
+
+@media (min-width: 900px) {
+  .osu-page {
+    max-width: 1000px;
+    width: calc(100% - 40px);
+  }
+  .floating-button {
+    transform: translateX(-89%);
+    left: 11%;
+  }
 }

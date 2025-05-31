@@ -1,15 +1,36 @@
 import { getModAssetPath, getModName } from '@/assets/imageAssetPaths';
 import {Tooltip} from "react-tooltip";
+import {GameMode} from "@/api/scoreSimulatorApi.ts";
 
 interface ModSelectorProps {
     selectedMods: string[];
     onModsChange: (mods: string[]) => void;
     isClassicMode: boolean;
+    mode: GameMode;
 }
 
-const AVAILABLE_MODS = ['EZ', 'NF', 'HT', 'HR', 'SD', 'PF', 'DT', 'NC', 'HD', 'FL', 'SO', 'TD'];
+const BASE_MODS = ['EZ', 'NF', 'HT', 'HR', 'SD', 'PF', 'DT', 'NC', 'HD', 'FL', 'AT', 'CM', 'SV2'];
+const OSU_AVAILABLE_MODS = BASE_MODS.concat(['RL', 'AP', 'SO', 'TP']);
+const TAIKO_AVAILABLE_MODS = BASE_MODS.concat(['RL']);
+const CTB_AVAILABLE_MODS = BASE_MODS.concat(['RL']);
+const MANIA_AVAILABLE_MODS = BASE_MODS.concat('FI', '1K', '2K', '3K', '4K', '5K', '6K', '7K', '8K', '9K', 'CP', 'MR', 'RD');
 
-const ModSelector = ({ selectedMods, onModsChange }: ModSelectorProps) => {
+const ModSelector = ({ selectedMods, onModsChange, mode }: ModSelectorProps) => {
+    const AVAILABLE_MODS = (() => {
+        switch (mode) {
+            case GameMode.OSU:
+                return OSU_AVAILABLE_MODS;
+            case GameMode.TAIKO:
+                return TAIKO_AVAILABLE_MODS;
+            case GameMode.CATCH:
+                return CTB_AVAILABLE_MODS;
+            case GameMode.MANIA:
+                return MANIA_AVAILABLE_MODS;
+            default:
+                return BASE_MODS; // Fallback to base mods if mode is unknown
+        }
+    })();
+
     const handleModToggle = (mod: string) => {
         if (mod === 'CL') return; // CL is handled by the classic mode toggle
 
@@ -78,7 +99,7 @@ const ModSelector = ({ selectedMods, onModsChange }: ModSelectorProps) => {
                         opacity={1}
                         className="z-50"
                         style={{
-                            backgroundColor: "#1d1619",
+                            backgroundColor: "var(--dropdown-bg)",
                             padding: "5px 20px 5px 20px",
                             fontSize: "12px"
                         }}

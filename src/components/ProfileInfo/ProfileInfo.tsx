@@ -1,12 +1,24 @@
-import {User} from "@/types/userTypes.ts";
+import { User } from "@/types/userTypes.ts";
 import ProfileHeader from "./ProfileHeader.tsx";
 import AllStatsSection from "./AllStatsSection.tsx";
+import { GameMode } from "./GameModeTab.tsx";
 
-function ProfileInfo(props: { user: User }) {
+interface ProfileInfoProps {
+    user: User;
+    activeMode?: GameMode;
+    onModeChange?: (mode: GameMode) => void;
+}
+
+function ProfileInfo({ user, activeMode = "osu", onModeChange }: ProfileInfoProps) {
     return (
         <div>
-        <ProfileHeader user={props.user} />
-        <AllStatsSection user={props.user} />
+            <ProfileHeader
+                user={user}
+                activeMode={activeMode}
+                onModeChange={onModeChange}
+                preferredMode={user.preferredMode}
+            />
+            <AllStatsSection user={user} />
         </div>
     );
 }

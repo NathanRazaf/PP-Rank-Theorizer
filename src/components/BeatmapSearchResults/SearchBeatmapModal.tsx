@@ -8,8 +8,9 @@ import {
 } from '@/components/ui/dialog';
 import { CompactBeatmapset, searchBeatmapsets } from "@/api/searchApi.ts";
 import CompactBeatmapsetItem from "@/components/BeatmapSearchResults/CompactBeatmapsetItem.tsx";
+import {GameMode} from "@/api/scoreSimulatorApi.ts";
 
-const SearchBeatmapModal = ({ onSelectBeatmap }: { onSelectBeatmap: (id: number) => void }) => {
+const SearchBeatmapModal = ({ onSelectBeatmap, mode }: { onSelectBeatmap: (id: number) => void, mode: GameMode }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
     const [beatmapsets, setBeatmapsets] = useState<CompactBeatmapset[]>([]);
@@ -20,9 +21,28 @@ const SearchBeatmapModal = ({ onSelectBeatmap }: { onSelectBeatmap: (id: number)
         e.stopPropagation();
         if (!searchQuery.trim()) return;
 
+        let modeInt = 0;
+        switch (mode) {
+            case GameMode.OSU:
+                modeInt = 0;
+                break;
+            case GameMode.TAIKO:
+                modeInt = 1;
+                break;
+            case GameMode.CATCH:
+                modeInt = 2;
+                break;
+            case GameMode.MANIA:
+                modeInt = 3;
+                break;
+            default:
+                console.error('Invalid game mode:', mode);
+                return;
+        }
+
         setIsSearching(true);
         try {
-            const results = await searchBeatmapsets(searchQuery);
+            const results = await searchBeatmapsets(searchQuery, modeInt);
             setBeatmapsets(results);
         } catch (error) {
             console.error('Search failed:', error);
@@ -37,11 +57,11 @@ const SearchBeatmapModal = ({ onSelectBeatmap }: { onSelectBeatmap: (id: number)
             <button
                 type="button"
                 onClick={() => setIsOpen(true)}
-                className="p-2 rounded-xl bg-osu-bg-3 hover:bg-osu-bg-2 transition-all"
+                className="p-2 rounded-xl add-score-dialog-button transition-all"
                 aria-label="Search beatmaps"
             >
                 <div className="flex flex-row items-center gap-2">
-                    <span>Search beatmaps   </span>
+                    <span>Search beatmaps</span>
                     <Search className="w-5 h-5" />
                 </div>
             </button>
@@ -51,7 +71,7 @@ const SearchBeatmapModal = ({ onSelectBeatmap }: { onSelectBeatmap: (id: number)
             )}
 
             <Dialog open={isOpen} onOpenChange={setIsOpen}>
-                <DialogContent className="sm:max-w-xl z-[150]">
+                <DialogContent className="sm:max-w-xl z-[150] search-dialog">
                     <DialogHeader>
                         <DialogTitle>Search Beatmaps</DialogTitle>
                     </DialogHeader>
@@ -63,7 +83,7 @@ const SearchBeatmapModal = ({ onSelectBeatmap }: { onSelectBeatmap: (id: number)
                                 value={searchQuery}
                                 onChange={(e) => setSearchQuery(e.target.value)}
                                 placeholder="Search beatmaps..."
-                                className="w-full px-4 py-2 rounded-lg !bg-osu-bg-3 focus:outline-none"
+                                className="w-full px-4 py-2 rounded-lg search-dialog-input focus:outline-none"
                                 autoComplete="off"
                             />
                             <button

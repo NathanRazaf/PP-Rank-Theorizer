@@ -6,16 +6,18 @@ export interface FullUserUpdateParams {
     profile: User
     scores: Score[]
     newScore: Score
+    mode: number
 }
 
 export const updateProfileWithScores = async ({
                                                   profile,
                                                   scores,
-                                                  newScore
+                                                  newScore,
+                                                  mode
                                               }: FullUserUpdateParams) => {
     try {
         const baseBody = createUserUpdateBodyRequest({ profile, scores });
-        const response = await fetch(`${API_BASE_URL}/score/new`, {
+        const response = await fetch(`${API_BASE_URL}/update/new?mode=${mode}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -57,12 +59,12 @@ export const updateProfileWithScores = async ({
 };
 
 export const deleteFakeScore =
-    async ({profile, scores, scoreId}:
-           { profile: User; scores: Score[]; scoreId: number; }) =>
+    async ({profile, scores, scoreId, mode}:
+           { profile: User; scores: Score[]; scoreId: number; mode: number }) =>
     {
     try {
         const baseBody = createUserUpdateBodyRequest({ profile, scores });
-        const response = await fetch(`${API_BASE_URL}/score/new`, {
+        const response = await fetch(`${API_BASE_URL}/update/new?mode=${mode}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
@@ -144,6 +146,8 @@ export function handleUserUpdateResponse(data: GetFullUserResponse): {
     return {
         profile: {
             username: data.profile.username,
+            id: data.profile.id,
+            preferredMode: data.profile.preferred_mode,
             avatarUrl: data.profile.avatar_url,
             coverUrl: data.profile.cover_url,
             countryCode: data.profile.country_code,

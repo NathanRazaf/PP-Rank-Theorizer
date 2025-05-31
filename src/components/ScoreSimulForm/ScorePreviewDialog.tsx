@@ -20,7 +20,7 @@ interface ScorePreviewDialogProps {
 
 const ModsArray = ({ mods }: { mods: string[] }) => {
     return (
-        <div className="flex gap-0 bg-[hsl(250,10%,30%)] h-full items-center">
+        <div className="flex gap-0 ssi-true h-full items-center">
             {mods.map((mod, index) => (
                 <div
                     key={index}
@@ -38,7 +38,7 @@ const ModsArray = ({ mods }: { mods: string[] }) => {
                         opacity={1}
                         className="z-50"
                         style={{
-                            backgroundColor: "#1d1619",
+                            backgroundColor: "var(--dropdown-bg)",
                             padding: "5px 20px 5px 20px",
                             fontSize: "12px"
                         }}
@@ -59,14 +59,14 @@ const ScorePreviewDialog = ({
 
     return (
         <Dialog open={isOpen} onOpenChange={onClose}>
-            <DialogContent className="sm:max-w-3xl bg-[#1d1619] border-none">
+            <DialogContent className="sm:max-w-3xl confirm-dialog border-none">
                 <DialogHeader>
                     <DialogTitle className="text-white">Score Preview</DialogTitle>
                 </DialogHeader>
 
                 <div className="flex flex-row ml-6 bg-transparent items-center h-11">
                     <div className="flex flex-row items-center
-                    min-w-0 w-0 flex-1 bg-[hsl(250,10%,30%)] rounded-bl-xl rounded-tl-xl h-full">
+                    min-w-0 w-0 flex-1 ssi-true rounded-bl-xl rounded-tl-xl h-full">
                         <div className="pr-3 pl-5 flex-shrink-0">
                             <img
                                 src={getGradeAssetPath(score.grade)}
@@ -91,7 +91,7 @@ const ScorePreviewDialog = ({
                         </div>
                         <div
                             className="flex items-center text-left
-                            pl-4 pr-4 -mr-4 bg-[hsl(250,10%,30%)] h-full w-24"
+                            pl-4 pr-4 -mr-4 ssi-true h-full w-24"
                             style={{clipPath: "polygon(85% -1px, 100% 50%, 85% 101%, 0% 101%, 0 -1px)"}}
                         >
                             <span style={{color: "#fc2"}} className="text-left font-semibold text-sm">
@@ -102,11 +102,11 @@ const ScorePreviewDialog = ({
 
                         <div
                             className="min-w-28 inline-flex items-center
-                            bg-[hsl(250,10%,25%)] justify-center h-full rounded-br-xl rounded-tr-xl"
+                            ssi-true-accent justify-center h-full rounded-br-xl rounded-tr-xl"
                         >
-                            <span className="text-base font-semibold pl-3" style={{color: "hsl(333,100%,70%)"}}>
+                            <span className="text-base font-semibold pl-3" style={{color: "hsl(var(--base-hue),100%,70%)"}}>
                                 {parseInt(score.pp.toFixed(0)).toLocaleString()}
-                                <span className="text-xs font-semibold" style={{color: "hsl(333,40%,70%)"}}>pp</span>
+                                <span className="text-xs font-semibold" style={{color: "hsl(var(--base-hue),40%,70%)"}}>pp</span>
                             </span>
                         </div>
                     </div>
@@ -117,14 +117,14 @@ const ScorePreviewDialog = ({
                         variant="destructive"
                         onClick={onClose}
                         disabled={isLoading}
-                        className="bg-gray-700 hover:bg-gray-600 border-none text-white"
+                        className="cancel-button border-none text-white"
                     >
                         Cancel
                     </Button>
                     <Button
                         onClick={onConfirm}
                         disabled={isLoading}
-                        className="bg-[hsl(333,100%,70%)] hover:bg-[hsl(333,100%,60%)] border-none text-white"
+                        className="border-none confirm-button text-white"
                     >
                         {isLoading ? 'Confirming...' : 'Confirm Score'}
                     </Button>

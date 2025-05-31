@@ -1,0 +1,71 @@
+/* GameModeTab responsive styles */
+
+/* Base styles for all screen sizes */
+.game-mode-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+/* Extra small screens (under 375px) */
+@media (max-width: 374px) {
+    /* Reduce tab padding and gaps further */
+    .flex.flex-row.gap-4.bg-osu-bg-2 {
+        padding: 2px 8px !important;
+        gap: 0.5rem !important;
+    }
+
+    /* Make icons even smaller */
+    .w-6.h-6 {
+        width: 1.25rem !important; /* 20px */
+        height: 1.25rem !important;
+    }
+
+    /* Adjust star icon */
+    .absolute.top-1.-right-4 {
+        top: 0 !important;
+        right: -0.75rem !important;
+        width: 0.875rem !important; /* 14px */
+        height: 0.875rem !important;
+    }
+
+    /* Make tooltip smaller */
+    [data-tooltip-id] {
+        font-size: 10px;
+    }
+}
+
+/* Small mobile screens (375px-550px) */
+@media (max-width: 550px) {
+    /* Reduce container padding and rounded corners */
+    .flex.flex-row.bg-osu-bg-2.rounded-3xl {
+        border-radius: 1rem;
+    }
+
+    /* Ensure no horizontal overflow */
+    .flex.flex-row.gap-4 {
+        max-width: 100%;
+        justify-content: space-around;
+    }
+}
+
+/* Medium screens */
+@media (min-width: 551px) and (max-width: 899px) {
+    /* Add more breathing room between items */
+    .flex.flex-row.gap-4.sm\:gap-10 {
+        gap: 1.5rem;
+    }
+}
+
+/* Fix tooltip positioning */
+[data-tooltip-place="top"] {
+    position: relative;
+}
+
+.react-tooltip {
+    z-index: 1000 !important;
+    max-width: 200px;
+    word-break: break-word;
+}

@@ -46,6 +46,7 @@ function RankHistory(props: { rankHistory: number[] }) {
     return (
         <div className="w-full h-24 m-0">
             <ResponsiveContainer width="100%" height="100%">
+                {data.length > 0 ? (
                 <LineChart
                     data={data}
                     margin={{ top: 5, right: 10, bottom: 5, left: 10 }}
@@ -75,6 +76,11 @@ function RankHistory(props: { rankHistory: number[] }) {
                         isAnimationActive={false}
                     />
                 </LineChart>
+                ) : (
+                    <div className="flex items-center justify-center h-full">
+                        <p className="text-osu-small-text text-xs">No recent plays</p>
+                        </div>
+                )}
             </ResponsiveContainer>
         </div>
     );
